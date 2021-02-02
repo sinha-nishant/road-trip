@@ -39,7 +39,7 @@
 	padding: 0.1%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991.9pxpx) {
 	.col-lg-4 {
 		margin-bottom: 2%;
 	}
