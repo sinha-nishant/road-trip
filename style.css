@@ -31,7 +31,7 @@
 	}
 
 	.col-lg-4 > iframe {
-		margin-top: 5%;
+		margin-top: 50px;
 		height: 400px;
 	}
 }
