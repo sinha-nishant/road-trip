@@ -42,23 +42,3 @@ I'd like to maintain a mostly minimal color scheme composed of black and white. 
 ## Database Diagram
 
 ![Database Diagram](ERD.png)
-
----
-
-## Wireframes
-
-### Create Account - Mobile
-
-![Create Account - Mobile](CreateAccountMobile.png)
-
-### Create account - Desktop
-
-![Create Account - Desktop](CreateAccountDesktop.png)
-
-### Favorites Page - Mobile
-
-![Favorites Page - Mobile](FavoritesPageMobile.png)
-
-### Favorites Page - Desktop
-
-![Favorites Page - Desktop](FavoritesPageDesktop.png)
