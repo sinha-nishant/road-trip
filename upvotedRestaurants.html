@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Upvoted Restaurants</title>
+	<lang="en"/>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">		
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+	<style>
+
+		body {
+			height: 100vh;
+		}
+
+		.list-item {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 2%;
+			margin-bottom: 2%;
+			font-weight: 300;
+		}
+
+		.list-group-item:hover {
+			background-color: black;
+			color: white;
+		}
+
+		.upvotes {
+			width: 70px;
+			display: flex;
+			justify-content: space-between;
+		}
+				
+		.bi-arrow-up-circle-fill {
+			color: #03DAC6;
+		}
+
+		img {
+			display: none;
+		}
+
+		@media (min-width: 768px) {
+			
+			#favorites-list {
+				height: 60vh;
+				overflow: auto;
+			}
+
+			img {
+				display: block;
+				border-radius: 10px;
+			}
+		}
+
+	</style>
+
+</head>
+<body>
+	<div id="navbar"></div>
+	<div class="container-fluid mt-1 mt-lg-0 p-2 px-lg-5">
+		<h1 class="text-center mt-5">Upvoted Restaurants</h1>
+		<div class="row mt-5 mx-auto ps-5 pe-5">
+			<div id="favorites-list" class="col-sm-12 col-md-6 col-lg-6 pe-5">
+				<ul class="list-group list-group-flush"> 
+					<li class="list-group-item border-0 rounded-pill fs-4" data-image="https://www.history.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_768/MTY1MTc3MjE0MzExMDgxNTQ1/topic-golden-gate-bridge-gettyimages-177770941.jpg">
+						<div class="list-item">Golden Gate Bridge<div class="upvotes"><span>50</span><i class="bi bi-arrow-up-circle-fill" aria-hidden="true"></i></div>
+					</li>
+					<li class="list-group-item border-0 rounded-pill fs-4">
+						<div class="list-item">Joshua Tree<div class="upvotes"><span>43</span><i class="bi bi-arrow-up-circle-fill" aria-hidden="true"></i></div>
+					</li>
+					<li class="list-group-item border-0 rounded-pill fs-4" data-image="https://www.smartertravel.com/wp-content/uploads/2017/08/grand-canyon-sunset-1200x627.jpg">
+						<div class="list-item">Grand Canyon National Park<div class="upvotes"><span>45</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
+					</li>
+					<li class="list-group-item border-0 rounded-pill fs-4">
+						<div class="list-item">Sedona<div class="upvotes"><span>50</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
+					</li>
+					<li class="list-group-item border-0 rounded-pill fs-4">
+						<div class="list-item">Bellagio Fountains<div class="upvotes"><span>27</span><i class="bi bi-arrow-up-circle-fill" aria-hidden="true"></i></div>
+					</li>
+					<li class="list-group-item border-0 rounded-pill fs-4">
+						<div class="list-item">Hollywood Sign<div class="upvotes"><span>41</span><i class="bi bi-arrow-up-circle-fill" aria-hidden="true"></i></div>
+					</li>
+					<li class="list-group-item border-0 rounded-pill fs-4">
+						<div class="list-item">Venice Beach<div class="upvotes"><span>27</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
+					</li>
+					<li class="list-group-item border-0 rounded-pill fs-4" data-image="https://www.tripsavvy.com/thmb/3it2GRMqxoxpTWtisl8QK0hbGEE=/3424x2568/smart/filters:no_upscale()/yosemite-falls-yosemite-national-park-california-usa-683750029-58b0dfc75f9b5860462db5b0.jpg">
+						<div class="list-item">Yosemite National Park<div class="upvotes"><span>14</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-6 col-lg-6 mt-auto mb-auto">
+				<img id="preview" class="w-100" src="https://www.mercurynews.com/wp-content/uploads/2018/10/SJM-L-WEEKENDER-1018-01.jpg"/>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function(){
+			$("#navbar").load("navbar.html");
+		}); 
+
+		$(".list-group-item").hover(function(event) {
+			if ($(window).width() >= 768) {
+				item = $(this);
+				$("#preview").fadeOut(500, function() {
+					$("#preview").attr("src", $(item).data("image"));
+					$("#preview").fadeIn(500);
+				});
+			}
+		});
+
+		$("i").click(function(event) {
+			event.stopPropagation();
+			// If user has not upvoted restaurant
+			numUpvotes = parseInt($(this).siblings("span").text());
+			if ($(this).hasClass("bi-arrow-up-circle")) {
+				$(this).siblings("span").text(numUpvotes + 1);
+				$(this).removeClass("bi-arrow-up-circle");
+				$(this).addClass("bi-arrow-up-circle-fill");
+			}
+			else {
+				$(this).siblings("span").text(numUpvotes - 1);
+				$(this).removeClass("bi-arrow-up-circle-fill");
+				$(this).addClass("bi-arrow-up-circle");
+			}
+		});
+
+	</script>
+</body>
+</html>
