@@ -70,9 +70,9 @@
 </head>
 <body>
 	<div id="navbar"></div>
-	<div class="container-fluid mt-1 mt-lg-0 p-2 px-lg-5">
+	<div class="container-fluid mt-1 mt-lg-0">
 		<h1 class="text-center mt-5">Your Favorites</h1>
-		<div class="row mt-5 mx-auto px-5">
+		<div class="row mt-5 mx-auto px-sm-1 px-md-3 px-lg-5">
 			<div id="favorites-list" class="col-sm-12 col-md-6 col-lg-5 pe-5">
 				<ul class="list-group list-group-flush"> 
 					<li class="list-group-item border-0 rounded-pill h3" data-image="https://www.history.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_768/MTY1MTc3MjE0MzExMDgxNTQ1/topic-golden-gate-bridge-gettyimages-177770941.jpg">
@@ -129,7 +129,7 @@
 			else {
 				$(this).removeClass("bi-star-fill");
 				$(this).addClass("bi-star");
-				$(this).parent().parent().fadeOut(500);
+				$(this).parent().parent().parent().fadeOut(500);
 			}
 		});
 	</script>

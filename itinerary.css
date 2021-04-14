@@ -1,0 +1,81 @@
+.col-lg-4 {
+	height: 80vh;
+}
+
+.col-lg-4 > .card {
+	height: 100%;
+}
+
+.card-image-top {
+	object-fit: cover;
+}
+
+#favorites-list {
+	height: 80%;
+}
+
+.list-item {
+	font-size: 18px;
+	display: flex;
+	justify-content: space-between;
+	padding-right: 10%;
+}
+
+.list-group-item:hover {
+	background-color: black;
+	color: white;
+}
+
+.bi-star-fill {
+	color: #03DAC6;
+}
+
+.hotel {
+	height: 30vh;
+}
+
+.hotel-food {
+	max-height: 50%;
+}
+
+.food {
+	padding-top: 5%;
+	padding-bottom: 0%;
+	font-size: 18px;
+	max-height: 70%;
+}
+
+.food > .card {
+	height: 50vh;
+}
+
+#restaurants {
+	max-height: 90%;
+}
+
+.bi-arrow-up-circle-fill {
+	color: #03DAC6;
+}
+
+.col-lg-4 > iframe {
+	height: 100%;
+}
+
+/* Tablet or smaller */
+@media (max-width: 991.9px) {
+	.col-lg-4 {
+		height: 50vh;
+	}
+
+	.hotel, .food {
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+	}
+
+	.col-lg-4 > iframe {
+		/* margin-top: 50px;
+		height: 400px;
+		margin-bottom: 25px; */
+	}
+}

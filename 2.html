@@ -11,26 +11,29 @@
 
 		<!-- Boostrap 4.6 CSS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-	
+		
 		<!-- Boostrap 4.6 js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-		<link rel="stylesheet" href="style.css"/>
+		<!-- Bootstrap Icons -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+		<link rel="stylesheet" href="itinerary.css"/>
 	</head>
 	<body>
 
 		<div id="navbar"></div>
 
-		<div class="container-fluid mt-1 mt-lg-0 p-2 px-lg-5">
+		<div class="container-fluid mt-1 mt-lg-4 mb-sm-5 mb-md-5 px-lg-5 pb-sm-5 pb-md-5">
 			<div class="row">
-				<div class="col-lg-4">
-					<div class = "card w-100 rounded-lg">
+				<div class="col-lg-4 overflow-scroll">
+					<div class = "card w-100 rounded-lg overflow-scroll">
 						<img class="card-image-top w-100 rounded-top" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Alcatraz_Island_photo_D_Ramey_Logan.jpg"/>
-						<div class = "card-body">
-							<h2 class="card-title">San Francisco</h2>
-							<h6 class="card-subtitle mb-2 text-muted">Day 2</h6>
+						<div id="locations" class = "card-body px-0 overflow-scroll">
+							<h2 class="card-title pl-3">San Francisco</h2>
+							<h6 class="card-subtitle pl-3 mb-2 text-muted">Day 2</h6>
 							
-							<table class="table table-hover">
+							<!-- <table class="table table-hover overflow-scroll">
 								<thead>
 									<tr>
 										<th scope="col-6">Location</th>
@@ -42,7 +45,7 @@
 										</th>
 									</tr>
 								</thead>
-								<tbody id="destinations">
+								<tbody id="destinations" class="overflow-scroll">
 									<tr data-image="https://upload.wikimedia.org/wikipedia/commons/0/0a/Alcatraz_Island_photo_D_Ramey_Logan.jpg">
 										<td>Alcatraz</td>
 										<td>1 hour</td>
@@ -68,14 +71,42 @@
 										<td>1 hour</td>
 									</tr>
 								</tbody>
-							</table>
+							</table> --> 
+							<div id="favorites-list" class="px-0 my-auto overflow-auto">
+								<ul id="destinations" class="list-group list-group-flush px-0 pb-5 w-100 "> 
+									<li class="list-group-item px-0 border-0" data-image="https://www.history.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_768/MTY1MTc3MjE0MzExMDgxNTQ1/topic-golden-gate-bridge-gettyimages-177770941.jpg">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Golden Gate Bridge</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+									<li class="list-group-item px-0 border-0">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Joshua Tree</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+									<li class="list-group-item px-0 border-0" data-image="https://www.smartertravel.com/wp-content/uploads/2017/08/grand-canyon-sunset-1200x627.jpg">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Grand Canyon National Park</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+									<li class="list-group-item px-0 border-0">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Sedona</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+									<li class="list-group-item px-0 border-0">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Bellagio Fountain</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+									<li class="list-group-item px-0 border-0">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Hollywood Sign</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+									<li class="list-group-item px-0 border-0">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Venice Beach</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+									<li class="list-group-item px-0 border-0" data-image="https://www.tripsavvy.com/thmb/3it2GRMqxoxpTWtisl8QK0hbGEE=/3424x2568/smart/filters:no_upscale()/yosemite-falls-yosemite-national-park-california-usa-683750029-58b0dfc75f9b5860462db5b0.jpg">
+										<div class="list-item"><div class="location-name pl-3 pr-sm-2 pr-md-3">Yosemite National Park</div><div class="my-auto pl-3"><i class="star bi bi-star" aria-hidden="true"></i></div></div>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 				
-				<div class="col-lg-4 d-flex flex-column">
+				<div class="hotel-food col-lg-4 d-flex flex-column">
 					<div class="hotel row">
-						<div class="card rounded-lg">
+						<div class="card w-100 rounded-lg">
 							<div class="row h-100 no-gutters">
 								<div class="col-6">
 									<div class="card-body">
@@ -89,54 +120,63 @@
 							</div>	
 						</div>
 					</div>
-					<div class="food row mt-auto">
-						<div class="card rounded-lg">
+					<div class="food row">
+						<div class="card w-100 rounded-lg">
 								<div class="card-body">
 								<h5 class="card-title">Food</h5>
-								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col">Restaurant</th>
-											<th scope="col">Cuisine</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Umami Burger</td>
-											<td>American</td>
-										</tr>
-										<tr>
-											<td>Bob's Donut & Pastry Shop</td>
-											<td>Bakery</td>
-										</tr>
-										<tr>
-											<td>Hong Kong Clay Pot</td>
-											<td>Chinese</td>
-										</tr>
-										<tr>
-											<td>Good Mong Kok Bakery</td>
-											<td>Chinese</td>
-										</tr>
-										<tr>
-											<td>Toyose</td>
-											<td>Korean</td>
-										</tr>
-										<tr>
-											<td>Buena Vista</td>
-											<td>Coffee</td>
-										</tr>
-									</tbody>
-								</table>
+								<div id="restaurants" class="overflow-auto">
+									<table class="table">
+										<thead>
+											<tr>
+												<th></th>
+												<th scope="col">Restaurant</th>
+												<th scope="col">Cuisine</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i></td>
+												<td>Umami Burger</td>
+												<td>American</td>
+											</tr>
+											<tr>
+												<td><i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i></td>
+												<td>Bob's Donut & Pastry Shop</td>
+												<td>Bakery</td>
+											</tr>
+											<tr>
+												<td><i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i></td>
+												<td>Hong Kong Clay Pot</td>
+												<td>Chinese</td>
+											</tr>
+											<tr>
+												<td><i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i></td>
+												<td>Good Mong Kok Bakery</td>
+												<td>Chinese</td>
+											</tr>
+											<tr>
+												<td><i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i></td>
+												<td>Toyose</td>
+												<td>Korean</td>
+											</tr>
+											<tr>
+												<td><i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i></td>
+												<td>Buena Vista</td>
+												<td>Coffee</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4">
-					<iframe class="w-100 h-100 rounded-3" src="https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d100895.23102425499!2d-122.52597143494339!3d37.790602929241395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x8085811569574f23%3A0x189c28e85a71ae17!2sAlcatraz%20Island%2C%20San%20Francisco%2C%20CA!3m2!1d37.826663599999996!2d-122.42301219999999!4m5!1s0x808587726045f763%3A0x71be8b68ef3ba730!2sGolden%20Gate%20Park%2C%20San%20Francisco%2C%20CA!3m2!1d37.7694208!2d-122.48621379999999!4m5!1s0x808587b97c4ad097%3A0xf1ce4042d68b2b5!2sQueen%20Wilhelmina%20Tulip%20Garden%2C%20John%20F%20Kennedy%20Drive%2C%20San%20Francisco%2C%20CA!3m2!1d37.770120399999996!2d-122.5092684!4m5!1s0x8085808fb9e85b85%3A0xbfb29b164018aab7!2sJapanese%20Tea%20Garden%2C%20Hagiwara%20Tea%20Garden%20Drive%2C%20San%20Francisco%2C%20CA!3m2!1d37.7700913!2d-122.4704359!4m5!1s0x8085808b58a58a1d%3A0x289f3092660f80ac!2sChinatown%2C%20San%20Francisco%2C%20CA!3m2!1d37.7941378!2d-122.4077914!4m5!1s0x808f7e08425fbda7%3A0x2d9e2665b504b657!2sTwin%20Peaks%2C%20San%20Francisco%2C%20CA!3m2!1d37.754406599999996!2d-122.4476845!5e0!3m2!1sen!2sus!4v1612849464839!5m2!1sen!2sus" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>		
+					<iframe class="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d100895.23102425499!2d-122.52597143494339!3d37.790602929241395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x8085811569574f23%3A0x189c28e85a71ae17!2sAlcatraz%20Island%2C%20San%20Francisco%2C%20CA!3m2!1d37.826663599999996!2d-122.42301219999999!4m5!1s0x808587726045f763%3A0x71be8b68ef3ba730!2sGolden%20Gate%20Park%2C%20San%20Francisco%2C%20CA!3m2!1d37.7694208!2d-122.48621379999999!4m5!1s0x808587b97c4ad097%3A0xf1ce4042d68b2b5!2sQueen%20Wilhelmina%20Tulip%20Garden%2C%20John%20F%20Kennedy%20Drive%2C%20San%20Francisco%2C%20CA!3m2!1d37.770120399999996!2d-122.5092684!4m5!1s0x8085808fb9e85b85%3A0xbfb29b164018aab7!2sJapanese%20Tea%20Garden%2C%20Hagiwara%20Tea%20Garden%20Drive%2C%20San%20Francisco%2C%20CA!3m2!1d37.7700913!2d-122.4704359!4m5!1s0x8085808b58a58a1d%3A0x289f3092660f80ac!2sChinatown%2C%20San%20Francisco%2C%20CA!3m2!1d37.7941378!2d-122.4077914!4m5!1s0x808f7e08425fbda7%3A0x2d9e2665b504b657!2sTwin%20Peaks%2C%20San%20Francisco%2C%20CA!3m2!1d37.754406599999996!2d-122.4476845!5e0!3m2!1sen!2sus!4v1612849464839!5m2!1sen!2sus" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>		
 				</div>
 			</div>
 		</div>
-	<script type="text/javascript" src="functions.js"></script>
+	<script type="text/javascript" src="itinerary-functions.js"></script>
 	<script>
 		$("#navbar").load("navbar.html");
 	</script>
