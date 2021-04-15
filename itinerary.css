@@ -10,8 +10,8 @@
 	object-fit: cover;
 }
 
-#favorites-list {
-	height: 80%;
+#destinations-container > ul {
+	max-height: 35vh;
 }
 
 .list-item {
@@ -34,10 +34,6 @@
 	height: 30vh;
 }
 
-.hotel-food {
-	max-height: 50%;
-}
-
 .food {
 	padding-top: 5%;
 	padding-bottom: 0%;
@@ -49,8 +45,8 @@
 	height: 50vh;
 }
 
-#restaurants {
-	max-height: 90%;
+#restaurants-container {
+	max-height: 40vh
 }
 
 .bi-arrow-up-circle-fill {
