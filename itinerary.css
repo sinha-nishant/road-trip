@@ -1,8 +1,8 @@
-.col-lg-4 {
+.col-lg {
 	height: 80vh;
 }
 
-.col-lg-4 > .card {
+.col-lg > .card {
 	height: 100%;
 }
 
@@ -53,7 +53,7 @@
 	color: #03DAC6;
 }
 
-.col-lg-4 > iframe {
+.col-lg > iframe {
 	height: 100%;
 }
 
