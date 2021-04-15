@@ -59,8 +59,13 @@
 
 /* Tablet or smaller */
 @media (max-width: 991.9px) {
-	.col-lg-4 {
-		height: 50vh;
+
+	.card-image-top {
+		height: 30vh;
+	}
+
+	.col-lg {
+		padding-bottom: 5%;
 	}
 
 	.hotel, .food {
@@ -69,9 +74,7 @@
 		width: 100%;
 	}
 
-	.col-lg-4 > iframe {
-		/* margin-top: 50px;
-		height: 400px;
-		margin-bottom: 25px; */
+	.col-lg > iframe {
+		height: 50vh;
 	}
 }
