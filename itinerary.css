@@ -60,12 +60,16 @@
 /* Tablet or smaller */
 @media (max-width: 991.9px) {
 
+	.col-lg {
+		padding-bottom: 5%;
+	}
+	
 	.card-image-top {
 		height: 30vh;
 	}
 
-	.col-lg {
-		padding-bottom: 5%;
+	#destinations-container > ul {
+		max-height: 30vh;
 	}
 
 	.hotel, .food {
@@ -74,7 +78,7 @@
 		width: 100%;
 	}
 
-	.col-lg > iframe {
+	#path {
 		height: 50vh;
 	}
 }
