@@ -1,84 +1,83 @@
 .col-lg {
-	height: 80vh;
+    height: 80vh;
 }
 
 .col-lg > .card {
-	height: 100%;
+    height: 100%;
 }
 
 .card-image-top {
-	object-fit: cover;
+    object-fit: cover;
 }
 
 #destinations-container > ul {
-	max-height: 35vh;
+    max-height: 35vh;
 }
 
 .list-item {
-	font-size: 18px;
-	display: flex;
-	justify-content: space-between;
-	padding-right: 10%;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10%;
 }
 
 .list-group-item:hover {
-	background-color: black;
-	color: white;
+    background-color: black;
+    color: white;
 }
 
 .bi-star-fill {
-	color: #03DAC6;
+    color: #03dac6;
 }
 
 .hotel {
-	height: 30vh;
+    height: 30vh;
 }
 
 .food {
-	padding-top: 5%;
-	padding-bottom: 0%;
-	font-size: 18px;
-	max-height: 70%;
+    padding-top: 5%;
+    padding-bottom: 0%;
+    font-size: 18px;
+    max-height: 70%;
 }
 
 .food > .card {
-	height: 50vh;
+    height: 50vh;
 }
 
 #restaurants-container {
-	max-height: 40vh
+    max-height: 40vh;
 }
 
 .bi-arrow-up-circle-fill {
-	color: #03DAC6;
+    color: #03dac6;
 }
 
 .col-lg > iframe {
-	height: 100%;
+    height: 100%;
 }
 
 /* Tablet or smaller */
 @media (max-width: 991.9px) {
+    .col-lg {
+        padding-bottom: 5%;
+    }
 
-	.col-lg {
-		padding-bottom: 5%;
-	}
-	
-	.card-image-top {
-		height: 30vh;
-	}
+    .card-image-top {
+        height: 30vh;
+    }
 
-	#destinations-container > ul {
-		max-height: 30vh;
-	}
+    #destinations-container > ul {
+        max-height: 30vh;
+    }
 
-	.hotel, .food {
-		margin-left: auto;
-		margin-right: auto;
-		width: 100%;
-	}
+    .hotel, .food {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
 
-	#path {
-		height: 50vh;
-	}
+    #path {
+        height: 50vh;
+    }
 }
