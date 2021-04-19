@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Create Account</title>
-        <lang="en"/>
+        <lang ="en" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -27,7 +27,6 @@
             crossorigin="anonymous"
         ></script>
 
-        <link rel="stylesheet" href="style.css" />
         <style>
             body {
                 height: 100vh;
@@ -47,23 +46,32 @@
         <div
             class="container-fluid d-flex align-items-center justify-content-center h-75 mt-1 mt-lg-0 pb-0 mb-0 px-lg-5"
         >
-            <form class="col-sm-6 col-md-4 col-lg-4">
+            <form name="create-form" class="col-sm-6 col-md-4 col-lg-4">
                 <h1 class="text-center mb-5">Create Account</h1>
                 <div>
                     <input
+                        name="email"
                         type="email"
                         class="form-control form-control-lg rounded-pill"
                         id="email"
                         placeholder="Email"
+                        required
                     />
+                    <div id="email-error" class="pt-3 text-danger"></div>
                 </div>
                 <div>
                     <input
+                        name="confirm-email"
                         type="email"
                         class="form-control form-control-lg rounded-pill mt-3"
                         id="confirm-email"
                         placeholder="Confirm Email"
+                        required
                     />
+                    <div
+                        id="confirm-email-error"
+                        class="pt-3 text-danger"
+                    ></div>
                 </div>
                 <div>
                     <input
@@ -71,7 +79,9 @@
                         class="form-control form-control-lg mt-3 rounded-pill"
                         id="password"
                         placeholder="Password"
+                        required
                     />
+                    <div id="password-error" class="pt-3 text-danger"></div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <button
@@ -87,6 +97,23 @@
         <script>
             $(function () {
                 $("#navbar").load("navbar.html");
+            });
+
+            $(function () {
+                $('form[name="create-form"]').submit(function (event) {
+                    if (
+                        $("#email").text().trim() !=
+                        $("#confirm-email").text().trim()
+                    ) {
+                        event.preventDefault();
+                        $("#confirm-email-error").text("Emails do not match");
+                    }
+
+                    if ($("#password").text().trim().length == 0) {
+                        event.preventDefault();
+                        $("#password-error").text("Invalid Password");
+                    }
+                });
             });
         </script>
     </body>
