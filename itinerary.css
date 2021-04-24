@@ -1,5 +1,20 @@
+.row {
+    opacity: 0
+}
 .col-lg {
     height: 80vh;
+}
+
+#destinations-col {
+    bottom: 400px;
+}
+
+#hotel-food {
+    bottom: -400px;
+}
+
+#path {
+    bottom: 400px;
 }
 
 .col-lg > .card {

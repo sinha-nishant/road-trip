@@ -36,3 +36,17 @@ $(".arrow").click(function (event) {
         $(this).addClass("bi-arrow-up-circle");
     }
 });
+
+anime({
+    targets: '.col-lg',
+    top: 0,
+    duration: 1000,
+    easing: 'easeOutQuad'
+});
+
+anime({
+    targets: '.row',
+    opacity: 100,
+    duration: 10000,
+    easing: 'easeInQuad'
+});
