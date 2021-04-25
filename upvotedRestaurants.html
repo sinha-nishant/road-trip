@@ -41,11 +41,14 @@
 		.list-group-item {
 			top: 200px;
 			opacity: 0;
+			transform: scale(0.95);
 		}
 
 		.list-group-item:hover {
 			background-color: black;
 			color: white;
+			transform: scale(1);
+			transition-duration: 0.5s;
 		}
 			
 		.bi-arrow-up-circle-fill {
@@ -137,6 +140,7 @@
 				$(this).siblings("span").text(numUpvotes + 1);
 				$(this).removeClass("bi-arrow-up-circle");
 				$(this).addClass("bi-arrow-up-circle-fill");
+				$(this).css("transition-duration", "1s");
 			}
 			else {
 				$(this).siblings("span").text(numUpvotes - 1);

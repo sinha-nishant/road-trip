@@ -51,13 +51,15 @@
 
             .list-group-item {
                 top: 200px;
-                /* left: -100px; */
                 opacity: 0;
+                transform: scale(0.95);
             }
 
             .list-group-item:hover {
                 background-color: black;
                 color: white;
+                transform: scale(1);
+                transition-duration: 0.5s;
             }
 
             .location-name {
@@ -247,20 +249,13 @@
                 if ($(this).hasClass("bi-star")) {
                     $(this).removeClass("bi-star");
                     $(this).addClass("bi-star-fill");
+                    $(this).css("transition-duration", "1s");
                 } else {
                     $(this).removeClass("bi-star-fill");
                     $(this).addClass("bi-star");
                     $(this).parent().parent().parent().fadeOut(400);
                 }
             });
-
-            // anime({
-            //     targets: '.list-group-item',
-            //     opacity: 100,
-            //     left: 0,
-            //     delay: anime.stagger(150), // increase delay by 150ms for each elements.
-            //     easing: 'easeInQuart'
-            // });
 
             // Middle to top slide list animation
             anime({
