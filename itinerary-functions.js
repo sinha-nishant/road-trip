@@ -54,12 +54,16 @@ anime({
 });
 
 $(".card, #path > iframe").mouseenter(function(event) {
-    $(this).css("box-shadow", "0px 0px 7px #03dac6")
-    $(this).css("transform", "scale(1.03)");
-    $(this).css("transition-duration", "300ms");
+    if ($(window).width() >= 992) {
+        $(this).css("box-shadow", "0px 0px 7px #03dac6")
+        $(this).css("transform", "scale(1.03)");
+        $(this).css("transition-duration", "300ms");
+    }
 });
 
 $(".card, #path > iframe").mouseleave(function(event) {
-    $(this).css("transform", "scale(1)");
-    $(this).css("box-shadow", "0px 0px")
+    if ($(window).width() >= 992) {
+        $(this).css("transform", "scale(1)");
+        $(this).css("box-shadow", "0px 0px")
+    }
 });
