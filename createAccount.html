@@ -104,14 +104,14 @@
             $(function () {
                 $('form[name="create-form"]').submit(function (event) {
                     if (
-                        $("#email").text().trim() !=
-                        $("#confirm-email").text().trim()
+                        $("#email").val().trim() !=
+                        $("#confirm-email").val().trim()
                     ) {
                         event.preventDefault();
                         $("#confirm-email-error").text("Emails do not match");
                     }
 
-                    if ($("#password").text().trim().length == 0) {
+                    if ($("#password").val().trim().length == 0) {
                         event.preventDefault();
                         $("#password-error").text("Invalid Password");
                     }
