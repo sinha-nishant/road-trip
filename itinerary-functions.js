@@ -19,6 +19,7 @@ $(".star").click(function (event) {
     if ($(this).hasClass("bi-star")) {
         $(this).removeClass("bi-star");
         $(this).addClass("bi-star-fill");
+        $(this).css("transition-duration", "1s");
     } else {
         $(this).removeClass("bi-star-fill");
         $(this).addClass("bi-star");
@@ -31,6 +32,7 @@ $(".arrow").click(function (event) {
     if ($(this).hasClass("bi-arrow-up-circle")) {
         $(this).removeClass("bi-arrow-up-circle");
         $(this).addClass("bi-arrow-up-circle-fill");
+        $(this).css("transition-duration", "0.5s");
     } else {
         $(this).removeClass("bi-arrow-up-circle-fill");
         $(this).addClass("bi-arrow-up-circle");
@@ -49,4 +51,15 @@ anime({
     opacity: 100,
     duration: 10000,
     easing: 'easeInQuad'
+});
+
+$(".card, #path > iframe").mouseenter(function(event) {
+    $(this).css("box-shadow", "0px 0px 7px #03dac6")
+    $(this).css("transform", "scale(1.03)");
+    $(this).css("transition-duration", "300ms");
+});
+
+$(".card, #path > iframe").mouseleave(function(event) {
+    $(this).css("transform", "scale(1)");
+    $(this).css("box-shadow", "0px 0px")
 });
