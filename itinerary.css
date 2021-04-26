@@ -59,7 +59,7 @@
 }
 
 .food {
-    padding-top: 5%;
+    padding-top: 1%;
     padding-bottom: 0%;
     font-size: 18px;
     max-height: 70%;
@@ -102,7 +102,16 @@
         width: 100%;
     }
 
+    .food {
+        padding-top: 5%;
+    }
+
+    .card {
+        box-shadow: none;
+    }
+
     #path {
         height: 50vh;
+        box-shadow: none;
     }
 }
