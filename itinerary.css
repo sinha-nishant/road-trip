@@ -14,12 +14,8 @@
     bottom: -400px;
 }
 
-#path {
+#path-col {
     bottom: 400px;
-}
-
-#path > iframe {
-    border: 0;
 }
 
 .col-lg > .card {
@@ -73,8 +69,9 @@
     color: #03dac6;
 }
 
-.col-lg > iframe {
+#path > iframe {
     height: 100%;
+    border: 0;
 }
 
 /* Tablet or smaller */
