@@ -33,6 +33,13 @@
         <!-- anime.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
+        <!-- Google Material Design Icons -->
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+            rel="stylesheet"
+        />
+
+        <!-- CSS for itinerary pages -->
         <link rel="stylesheet" href="itinerary.css" />
     </head>
     <body>
@@ -161,7 +168,13 @@
                             <div class="row h-100 no-gutters">
                                 <div class="col-6">
                                     <div class="card-body">
-                                        <h5 class="card-title">Hotel</h5>
+                                        <h4 class="card-title d-inline">
+                                            <span
+                                                class="material-icons-round"
+                                                style="font-size: 34px"
+                                                >hotel</span
+                                            >
+                                        </h4>
                                         <p class="card-text">
                                             Courtyard San Francisco Fisherman's
                                             Wharf
@@ -184,7 +197,6 @@
                     <div class="food row">
                         <div class="card w-100 rounded-lg">
                             <div class="card-body">
-                                <h5 class="card-title">Food</h5>
                                 <div
                                     id="restaurants-container"
                                     class="overflow-auto"
@@ -192,7 +204,11 @@
                                     <table class="table table-borderless">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                                <th class="pl-0 pb-0"><span
+                                                    class="material-icons-round"
+                                                    style="font-size: 34px"
+                                                    >restaurant_menu</span
+                                                ></th>
                                                 <th scope="col">Restaurant</th>
                                                 <th scope="col">Cuisine</th>
                                             </tr>

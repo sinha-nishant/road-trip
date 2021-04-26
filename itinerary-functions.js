@@ -49,8 +49,8 @@ anime({
 anime({
     targets: '.row',
     opacity: 100,
-    duration: 10000,
-    easing: 'easeInQuad'
+    duration: 2000,
+    easing: 'easeInCubic'
 });
 
 $(".card, #path").mouseenter(function(event) {
