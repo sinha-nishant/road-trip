@@ -26,6 +26,10 @@
     object-fit: cover;
 }
 
+.material-icons-round {
+    font-size: 34px;
+}
+
 #destinations-container > ul {
     max-height: 39vh;
 }
@@ -48,6 +52,10 @@
 
 .hotel {
     height: 30vh;
+}
+
+#hotel-name {
+    font-size: 18px;
 }
 
 .food {
