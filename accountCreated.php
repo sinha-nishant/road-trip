@@ -37,6 +37,7 @@ if (isset($_POST['password'])) {
 // Insert account into database
 $sql = "INSERT INTO user(email, password) VALUES (?, ?);";
 $stmt = $mysqli->prepare($sql);
+$pass = hash("sha512", $pass);
 $stmt->bind_param("ss", $email, $pass);
 $stmt->execute();
 

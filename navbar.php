@@ -78,10 +78,13 @@ $mysqli->close();
                      </li>
                 <?php endif; ?>
                 <?php if (isset($_SESSION["email"])): ?>
-                    <li id="email" class="nav-item">
-                        <a class="nav-link" href="logout.php">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?php echo $_SESSION["email"] ?>
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="logout.php">Logout</a>
+                        </div>
                     </li>
                 <?php endif; ?> 
                 
@@ -106,6 +109,11 @@ $mysqli->close();
             </ul>
         </div>
     </nav>
+    <script>
+        $("#email").mouseenter(function() {
+            $("#email > a").text("Logout");
+        });
+    </script>
 </body>
 
 </html>
