@@ -18,7 +18,7 @@ if ($mysqli->connect_error) {
 
 $mysqli->set_charset('utf8');
 
-// Locations for day query
+// Dropdown itinerary options
 $sql = "SELECT day_id, region_name from day;";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
@@ -58,11 +58,12 @@ $mysqli->close();
             color: white;
         }
     </style>
+
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md navbar-light mt-3 ml-lg-4">
-        <a class="navbar-brand h1 mb-0" href="index.html">Road Trip</a>
+        <a class="navbar-brand h1 mb-0" href="index.php">Road Trip</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -90,12 +91,6 @@ $mysqli->close();
                                 Day <?php echo $day["day_id"] ?> - <?php echo $day["region_name"] ?>
                             </a>
                         <?php endforeach; ?>
-                        <!-- <a class="dropdown-item" href="index.html"
-                                >Day 1 - SF</a
-                            >
-                            <a class="dropdown-item" href="2.html"
-                                >Day 2 - SF</a
-                            > -->
                     </div>
                 </li>
             </ul>

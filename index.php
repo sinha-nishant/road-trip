@@ -31,9 +31,8 @@ function processQuery($mysqli, $stmt)
 
 if (!isset($_GET["day"])) {
     $day_id = 1;
-}
-
-else {
+} else {
+    echo "DAY " . $_GET["day"];
     $day_id = $_GET["day"];
 }
 
@@ -96,7 +95,7 @@ $mysqli->close();
 </head>
 
 <body>
-    <?php include ('navbar.php'); ?>
+    <?php include('navbar.php'); ?>
 
     <div class="container-fluid mt-1 px-lg-5 pb-sm-2 pb-lg-0">
         <div class="row">
@@ -180,4 +179,5 @@ $mysqli->close();
     </div>
     <script type="module" src="itinerary-functions.js"></script>
 </body>
+
 </html>
