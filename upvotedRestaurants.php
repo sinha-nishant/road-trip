@@ -80,7 +80,7 @@
 
 </head>
 <body>
-	<div id="navbar"></div>
+	<?php include ('navbar.php'); ?>
 	<div class="container-fluid mt-1 mt-lg-0 px-lg-5 pb-sm-5 mb-sm-5">
 		<h1 class="text-center mt-5">Upvoted Restaurants</h1>
 		<div class="row mt-5 mx-auto px-lg-5">
@@ -118,9 +118,6 @@
 		</div>
 	</div>
 	<script>
-		$(function(){
-			$("#navbar").load("navbar.html");
-		}); 
 
 		$(".list-group-item").hover(function(event) {
 			if ($(window).width() >= 768) {

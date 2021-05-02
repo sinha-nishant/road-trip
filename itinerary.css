@@ -73,6 +73,11 @@
     max-height: 45vh;
 }
 
+thead {
+    position: sticky;
+    top: 0%;
+}
+
 .bi-arrow-up-circle-fill {
     color: #03dac6;
 }

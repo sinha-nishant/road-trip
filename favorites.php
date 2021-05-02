@@ -89,7 +89,7 @@
         </style>
     </head>
     <body>
-        <div id="navbar"></div>
+        <?php include ('navbar.php'); ?>
         <div class="container-fluid mt-1 mt-lg-0">
             <h1 class="text-center mt-5">Your Favorites</h1>
             <div
@@ -231,17 +231,16 @@
             </div>
         </div>
         <script>
-            $(function () {
-                $("#navbar").load("navbar.html");
-            });
 
             $(".list-group-item").mouseenter(function (event) {
                 if ($(window).width() >= 768) {
                     item = $(this);
-                    $("#preview").fadeOut(400, function () {
-                        $("#preview").attr("src", $(item).data("image"));
-                        $("#preview").fadeIn(400);
-                    });
+                    if ($(item).data("image") != $("#preview").attr("src")) {
+                        $("#preview").fadeOut(400, function () {
+                            $("#preview").attr("src", $(item).data("image"));
+                            $("#preview").fadeIn(400);
+                        });
+                    } 
                 }
             });
 

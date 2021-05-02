@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login</title>
+        <title>Create Account</title>
         <lang="en" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,17 +40,16 @@
                 transform: scale(1.1);
                 transition-duration: 0.4s;
             }
-
         </style>
     </head>
     <body>
-        <div id="navbar"></div>
+        <?php include ('navbar.php'); ?>
 
         <div
             class="container-fluid d-flex align-items-center justify-content-center h-75 mt-1 mt-lg-0 pb-0 mb-0 px-lg-5"
         >
-            <form name="login-form" class="col-sm-6 col-md-4 col-lg-4">
-                <h1 class="text-center mb-5">Login</h1>
+            <form name="create-form" class="col-sm-6 col-md-4 col-lg-4">
+                <h1 class="text-center mb-5">Create Account</h1>
                 <div>
                     <input
                         name="email"
@@ -64,7 +63,20 @@
                 </div>
                 <div>
                     <input
-                        name="password"
+                        name="confirm-email"
+                        type="email"
+                        class="form-control form-control-lg rounded-pill mt-3"
+                        id="confirm-email"
+                        placeholder="Confirm Email"
+                        required
+                    />
+                    <div
+                        id="confirm-email-error"
+                        class="pt-3 text-danger"
+                    ></div>
+                </div>
+                <div>
+                    <input
                         type="password"
                         class="form-control form-control-lg mt-3 rounded-pill"
                         id="password"
@@ -79,18 +91,23 @@
                         type="submit"
                         class="btn btn-lg btn-block mt-5 bg-dark text-white rounded-0 w-50"
                     >
-                        Login
+                        Create
                     </button>
                 </div>
             </form>
         </div>
         <script>
-            $(function () {
-                $("#navbar").load("navbar.html");
-            });
 
             $(function () {
-                $('form[name="login-form"]').submit(function (event) {
+                $('form[name="create-form"]').submit(function (event) {
+                    if (
+                        $("#email").val().trim() !=
+                        $("#confirm-email").val().trim()
+                    ) {
+                        event.preventDefault();
+                        $("#confirm-email-error").text("Emails do not match");
+                    }
+
                     if ($("#password").val().trim().length == 0) {
                         event.preventDefault();
                         $("#password-error").text("Invalid Password");

@@ -2,8 +2,9 @@ function changeImage(newImage) {
     let image = document.querySelector("img");
     let old_width = image.width;
     let old_height = image.height;
+    image.alt = newImage.dataset.alt;
 
-    image.src = newImage;
+    image.src = newImage.dataset.image;
     image.width = old_width;
     image.height = old_height;
 }
@@ -11,7 +12,7 @@ function changeImage(newImage) {
 let destinations = document.querySelector("#destinations").children;
 for (let i = 0; i < destinations.length; i++) {
     destinations[i].onmouseover = function () {
-        changeImage(destinations[i].dataset.image);
+        changeImage(destinations[i]);
     };
 }
 
@@ -39,18 +40,22 @@ $(".arrow").click(function (event) {
     }
 });
 
-anime({
-    targets: '.col-lg',
-    top: 0,
-    duration: 1000,
-    easing: 'easeOutQuad'
-});
-
-anime({
-    targets: '.row',
-    opacity: 100,
-    duration: 2000,
-    easing: 'easeInCubic'
+$(function() {
+    $("#path > iframe").on("load", function() {
+        anime({
+            targets: '.col-lg',
+            top: 0,
+            duration: 1000,
+            easing: 'easeOutQuad'
+        });
+        
+        anime({
+            targets: '.row',
+            opacity: 100,
+            duration: 2000,
+            easing: 'easeInCubic'
+        });
+    });
 });
 
 $(".card, #path").mouseenter(function(event) {
