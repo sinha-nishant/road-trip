@@ -32,7 +32,6 @@ function processQuery($mysqli, $stmt)
 if (!isset($_GET["day"])) {
     $day_id = 1;
 } else {
-    echo "DAY " . $_GET["day"];
     $day_id = $_GET["day"];
 }
 
@@ -62,6 +61,12 @@ $stmt->bind_param("i", $day_id);
 $restaurants = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
 
 $mysqli->close();
+
+if (isset($_POST["confirm-email"])) {
+    session_start();
+    $_SESSION["email"] = $_POST["confirm-email"];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
