@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // establish DB connection
 $host = "303.itpwebdev.com";
 $user = "sinhan_db_user";
@@ -72,7 +74,7 @@ $mysqli->close();
     <?php include('navbar.php'); ?>
 
     <div class="container-fluid d-flex align-items-center justify-content-center h-75 mt-1 mt-lg-0 pb-0 mb-0 px-lg-5">
-        <form action="index.php" method="POST" name="create-form" class="col-sm-6 col-md-4 col-lg-4">
+        <form action="accountCreated.php" method="POST" name="create-form" class="col-sm-6 col-md-4 col-lg-4">
             <h1 class="text-center mb-5">Create Account</h1>
             <div>
                 <input name="email" type="email" class="form-control form-control-lg rounded-pill" id="email" placeholder="Email" required />

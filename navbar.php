@@ -78,7 +78,7 @@ $mysqli->close();
                      </li>
                 <?php endif; ?>
                 <?php if (isset($_SESSION["email"])): ?>
-                    <li class="nav-item">
+                    <li id="email" class="nav-item">
                         <a class="nav-link" href="logout.php">
                             <?php echo $_SESSION["email"] ?>
                         </a>
@@ -97,7 +97,7 @@ $mysqli->close();
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php foreach ($days as $day) : ?>
-                            <a class="dropdown-item" href="../index.php?day=<?php echo $day["day_id"] ?>">
+                            <a class="dropdown-item" href=<?php echo "../index.php?day=" . $day["day_id"] ?>>
                                 Day <?php echo $day["day_id"] ?> - <?php echo $day["region_name"] ?>
                             </a>
                         <?php endforeach; ?>

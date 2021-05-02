@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // establish DB connection
 $host = "303.itpwebdev.com";
 $user = "sinhan_db_user";
@@ -61,12 +63,6 @@ $stmt->bind_param("i", $day_id);
 $restaurants = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
 
 $mysqli->close();
-
-if (isset($_POST["confirm-email"])) {
-    session_start();
-    $_SESSION["email"] = $_POST["confirm-email"];
-}
-
 ?>
 <!DOCTYPE html>
 <html>

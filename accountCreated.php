@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // establish DB connection
 $host = "303.itpwebdev.com";
 $user = "sinhan_db_user";
@@ -39,6 +41,8 @@ $stmt->bind_param("ss", $email, $pass);
 $stmt->execute();
 
 $mysqli->close();
+
+$_SESSION["email"] = $_POST["confirm-email"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
