@@ -64,6 +64,7 @@
                     $("#password-error").text("Invalid Password");
                 }
                 else {
+                    // jQuery AJAX PHP
                     $.post('authenticate.php', $('form[name="login-form"]').serialize(), function(response) {
                         if (response == "invalid") {
                             $("#password-error").text("Invalid Credentials");

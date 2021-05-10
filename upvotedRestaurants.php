@@ -129,7 +129,7 @@ $mysqli->close();
 						<li class="list-group-item px-3 border-0 rounded-pill h3" data-image=<?php echo $res["image_url"] ?>>
 							<div class="list-item pl-0">
 								<div class="pl-0 col-8"><?php echo $res["name"] ?></div>
-								<div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3"><?php echo $res["upvotes"] ?></span>
+								<div class="col-4 my-auto d-flex justify-content-end"><span id=<?php echo $res["restaurant_id"] ?> class="pr-3"><?php echo $res["upvotes"] ?></span>
 								<?php if(isset($_SESSION["email"])): ?>
 									<div class="my-auto pl-3">
 										<i class="bi bi-arrow-up-circle" aria-hidden="true" data-res=<?php echo $res["restaurant_id"] ?>></i>
@@ -162,23 +162,32 @@ $mysqli->close();
 		$("i").click(function(event) {
 			event.stopPropagation();
 			// If user has not upvoted restaurant
-			numUpvotes = parseInt($(this).siblings("span").text());
-			if ($(this).hasClass("bi-arrow-up-circle")) {
-				$.post('upvote.php',  {'res_id': $(this).data("res")}, function(response) {
+			let icon = $(this);
+			numUpvotes = parseInt($("#" + $(icon).data("res")).text());
+			if ($(icon).hasClass("bi-arrow-up-circle")) {
+				// jQuery AJAX PHP
+				$.post('vote.php',  {'res_id': $(icon).data("res"), 'upvote': true}, function(response) {
 					if (response != "successful") {
 						alert("Database error: Could not upvote");
+					} else {
+						$("#" + $(icon).data("res")).text(numUpvotes + 1)
+						$(icon).removeClass("bi-arrow-up-circle");
+						$(icon).addClass("bi-arrow-up-circle-fill");
+						$(icon).css("transition-duration", "1s");
 					}
 				});
-
-				$(this).siblings("span").text(numUpvotes + 1);
-				$(this).removeClass("bi-arrow-up-circle");
-				$(this).addClass("bi-arrow-up-circle-fill");
-				$(this).css("transition-duration", "1s");
 			}
 			else {
-				$(this).siblings("span").text(numUpvotes - 1);
-				$(this).removeClass("bi-arrow-up-circle-fill");
-				$(this).addClass("bi-arrow-up-circle");
+				// jQuery AJAX PHP
+				$.post('vote.php',  {'res_id': $(icon).data("res"), 'upvote': false}, function(response) {
+					if (response != "successful") {
+						alert("Database error: Could not remove upvote");
+					} else {
+						$("#" + $(icon).data("res")).text(numUpvotes - 1)
+						$(icon).removeClass("bi-arrow-up-circle-fill");
+						$(icon).addClass("bi-arrow-up-circle");
+					}
+				});
 			}
 		});
 

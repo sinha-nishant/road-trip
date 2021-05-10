@@ -55,7 +55,7 @@ $stmt->bind_param("i", $day_id);
 $locations = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
 
 // Restaurants for day query
-$sql = "SELECT name, cuisine FROM restaurant INNER JOIN restaurant_has_day
+$sql = "SELECT restaurant.restaurant_id AS res_id, name, cuisine FROM restaurant INNER JOIN restaurant_has_day
 ON restaurant.restaurant_id = restaurant_has_day.restaurant_id
 WHERE restaurant_has_day.day_id = ?;";
 $stmt = $mysqli->prepare($sql);
@@ -163,7 +163,7 @@ $mysqli->close();
                                             <tr>
                                                 <td>
                                                     <?php if(isset($_SESSION["email"])): ?>
-                                                        <i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i>
+                                                        <i class="arrow bi bi-arrow-up-circle" data-res=<?php echo $res["res_id"] ?> aria-hidden="true"></i>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td><?php echo $res['name'] ?></td>

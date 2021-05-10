@@ -19,11 +19,23 @@ if ($mysqli->connect_error) {
 
 $mysqli->set_charset('utf8');
 
-$sql = "UPDATE sinhan_road_trip.restaurant SET upvotes = upvotes + 1 WHERE restaurant_id = ?;";
+if (!isset($_POST["upvote"])) {
+    echo "unsuccessful";
+    $mysqli->close();
+    exit();
+}
+
+if ($_POST["upvote"] == "true") {
+    $sql = "UPDATE sinhan_road_trip.restaurant SET upvotes = upvotes + 1 WHERE restaurant_id = ?;";
+} else {
+    $sql = "UPDATE sinhan_road_trip.restaurant SET upvotes = upvotes - 1 WHERE restaurant_id = ?;";
+}
+
 $stmt = $mysqli->prepare($sql);
 $restaurant = $_POST["res_id"];
 $stmt->bind_param("i", $restaurant);
 $stmt->execute();
+
 echo "successful";
 $mysqli->close();
 ?>
