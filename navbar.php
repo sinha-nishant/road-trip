@@ -100,7 +100,7 @@ $mysqli->close();
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php foreach ($days as $day) : ?>
-                            <a class="dropdown-item" href=<?php echo "../index.php?day=" . $day["day_id"] ?>>
+                            <a class="dropdown-item" href=<?php echo "index.php?day=" . $day["day_id"] ?>>
                                 Day <?php echo $day["day_id"] ?> - <?php echo $day["region_name"] ?>
                             </a>
                         <?php endforeach; ?>
