@@ -20,14 +20,21 @@ if ($mysqli->connect_error) {
 
 $mysqli->set_charset('utf8');
 
-if (isset($_POST['confirm-email'])) {
+if (isset($_POST['email']) && !empty($_POST['email'])) {
+	$email = $_POST['email'];
+} else {
+	$mysqli->close();
+	exit();
+}
+
+if (isset($_POST['confirm-email']) && !empty($_POST['confirm-email'])) {
 	$email = $_POST['confirm-email'];
 } else {
 	$mysqli->close();
 	exit();
 }
 
-if (isset($_POST['password'])) {
+if (isset($_POST['password']) && !empty($_POST['password'])) {
 	$pass = $_POST['password'];
 } else {
 	$mysqli->close();

@@ -1,5 +1,41 @@
 <?php
-session_start()
+session_start();
+
+// establish DB connection
+$host = "303.itpwebdev.com";
+$user = "sinhan_db_user";
+$password = "uscItp2021";
+$db = "sinhan_road_trip";
+
+// to use MySQLi extension
+$mysqli = new mysqli($host, $user, $password, $db);
+
+// returns error code from db connection call
+if ($mysqli->connect_error) {
+    // there is an error if in this block
+    echo $mysqli->connect_error;
+    // terminates PHP program
+    exit();
+}
+
+$mysqli->set_charset('utf8');
+
+function processQuery($mysqli, $stmt)
+{
+    $stmt->execute();
+    $results = $stmt->get_result();
+    if (!$results) {
+        echo $mysqli->error;
+        exit();
+    }
+    return $results;
+}
+
+$sql = "SELECT * FROM sinhan_road_trip.restaurant ORDER BY upvotes DESC;";
+$stmt = $mysqli->prepare($sql);
+$result = processQuery($mysqli, $stmt);
+
+$mysqli->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,46 +125,37 @@ session_start()
 		<div class="row mt-5 mx-auto px-lg-5">
 			<div id="upvotes-list" class="col-sm-12 col-md-6 col-lg-6">
 				<ul class="list-group list-group-flush"> 
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://scontent-lax3-1.xx.fbcdn.net/v/t1.6435-9/118544974_3537895139596193_5785301805624521604_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=a26aad&_nc_ohc=CS1DNR0Jn2MAX_J8-8k&_nc_ht=scontent-lax3-1.xx&oh=f7a524da06afbe9824084c509030c43d&oe=609BDF2D">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Toyose</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">50</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://www.umamiburger.com/wp-content/uploads/2020/06/umamiburger_umamiburger_trustuscombo-e1593190873115.jpg">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Umami Burger</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">43</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://i.redd.it/8gpgiz2mq2n41.jpg">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Randy's Donuts</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">40</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://cdn.vox-cdn.com/thumbor/szjVspM0DwXneekFfxXdr74r9Hk=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/13652278/JakobLayman.1218.HowlinRaysSecretMenu_020.jpg">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Howlin' Ray's</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">29</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://cdn.vox-cdn.com/thumbor/rDJSyJgy9xP_bI-NxCXNAKq7WJQ=/0x0:950x534/1820x1213/filters:focal(399x191:551x343):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/67051459/Bacchanal_Buffet.0.jpg">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Bacchanal Buffet</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">21</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://d1ralsognjng37.cloudfront.net/a15574d3-b83d-427e-b268-fbf1dd91e96c.jpeg">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Wurstkuche</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">18</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://www.discoverlosangeles.com/sites/default/files/images/2019-03/Kogi%20Taqueria%20Short%20Rib%20Taco%20Jakob%20Layman.JPG?width=1600&height=1200&fit=crop&quality=78&auto=webp">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Kogi</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">11</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
-					<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="https://media.timeout.com/images/103939303/image.jpg">
-						<div class="list-item pl-0"><div class="pl-0 col-8">Prince of Venice</div><div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3">7</span><i class="bi bi-arrow-up-circle" aria-hidden="true"></i></div>
-					</li>
+					<?php foreach ($result as $res) : ?>
+						<li class="list-group-item px-3 border-0 rounded-pill h3" data-image=<?php echo $res["image_url"] ?>>
+							<div class="list-item pl-0">
+								<div class="pl-0 col-8"><?php echo $res["name"] ?></div>
+								<div class="col-4 my-auto d-flex justify-content-end"><span class="pr-3"><?php echo $res["upvotes"] ?></span>
+								<?php if(isset($_SESSION["email"])): ?>
+									<div class="my-auto pl-3">
+										<i class="bi bi-arrow-up-circle" aria-hidden="true" data-res=<?php echo $res["restaurant_id"] ?>></i>
+									</div>
+								<?php endif; ?>
+							</div>
+						</li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 			<div id="img-container" class="col-md-6 col-lg-6 m-auto">
-				<img id="img-preview" class="w-100 m-auto" src="https://scontent-lax3-1.xx.fbcdn.net/v/t1.6435-9/118544974_3537895139596193_5785301805624521604_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=a26aad&_nc_ohc=CS1DNR0Jn2MAX_J8-8k&_nc_ht=scontent-lax3-1.xx&oh=f7a524da06afbe9824084c509030c43d&oe=609BDF2D"/>
+				<img id="img-preview" class="w-100 m-auto" src="https://i.pinimg.com/originals/8d/11/6a/8d116aa75e0a4e779b57682e0a92c84d.jpg" alt="image of food at restaurant"/>
 			</div>
 		</div>
 	</div>
 	<script>
 
-		$(".list-group-item").hover(function(event) {
+		$(".list-group-item").mouseenter(function(event) {
 			if ($(window).width() >= 768) {
 				item = $(this);
-				$("#img-preview").fadeOut(400, function() {
-					$("#img-preview").attr("src", $(item).data("image"));
-					$("#img-preview").fadeIn(400);
-				});
+				if ($(item).data("image") != $("#img-preview").attr("src")) {
+					$("#img-preview").fadeOut(400, function() {
+						$("#img-preview").attr("src", $(item).data("image"));
+						$("#img-preview").fadeIn(400);
+					});
+				}
 			}
 		});
 
@@ -137,6 +164,12 @@ session_start()
 			// If user has not upvoted restaurant
 			numUpvotes = parseInt($(this).siblings("span").text());
 			if ($(this).hasClass("bi-arrow-up-circle")) {
+				$.post('upvote.php',  {'res_id': $(this).data("res")}, function(response) {
+					if (response != "successful") {
+						alert("Database error: Could not upvote");
+					}
+				});
+
 				$(this).siblings("span").text(numUpvotes + 1);
 				$(this).removeClass("bi-arrow-up-circle");
 				$(this).addClass("bi-arrow-up-circle-fill");

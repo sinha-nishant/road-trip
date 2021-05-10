@@ -1,5 +1,20 @@
 <?php
 session_start();
+
+if (isset($_POST['email']) && !empty($_POST['email'])) {
+	$email = $_POST['email'];
+} else {
+	$mysqli->close();
+	exit();
+}
+
+if (isset($_POST['password']) && !empty($_POST['password'])) {
+	$pass = $_POST['password'];
+} else {
+	$mysqli->close();
+	exit();
+}
+
 // establish DB connection
 $host = "303.itpwebdev.com";
 $user = "sinhan_db_user";
@@ -36,12 +51,14 @@ $stmt = $mysqli->prepare($sql);
 $email = $_POST["email"];
 $pass = hash("sha512", $_POST["password"]);
 $stmt->bind_param("ss", $email, $pass);
-if (processQuery($mysqli, $stmt)->num_rows == 0) {
+$result = processQuery($mysqli, $stmt);
+if ($result->num_rows == 0) {
 	$mysqli->close();
     echo "invalid";
 }
 else {
 	$_SESSION["email"] = $email;
+    $_SESSION["id"] = ($result->fetch_assoc())["user_id"];
 	$mysqli->close();
 	echo "";
 	exit();

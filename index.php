@@ -116,9 +116,11 @@ $mysqli->close();
                                             <div class="location-name pl-3 pr-sm-2 pr-md-3">
                                                 <?php echo $loc["name"] ?>
                                             </div>
+                                            <?php if(isset($_SESSION["email"])): ?>
                                             <div class="my-auto pl-3">
                                                 <i class="star bi bi-star" aria-hidden="true"></i>
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>
@@ -159,7 +161,11 @@ $mysqli->close();
                                     <tbody>
                                         <?php foreach ($restaurants as $res) : ?>
                                             <tr>
-                                                <td><i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i></td>
+                                                <td>
+                                                    <?php if(isset($_SESSION["email"])): ?>
+                                                        <i class="arrow bi bi-arrow-up-circle" aria-hidden="true"></i>
+                                                    <?php endif; ?>
+                                                </td>
                                                 <td><?php echo $res['name'] ?></td>
                                                 <td><?php echo $res['cuisine'] ?></td>
                                             </tr>
