@@ -49,10 +49,31 @@ $hotel_map_url = $result['hotel_map_url'];
 $map_url = $result['map_url'];
 
 // Locations for day query
-$sql = "SELECT name, image_url from location WHERE day_id = ?";
+$sql = "SELECT location_id, name, image_url from location WHERE day_id = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $day_id);
 $locations = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
+
+// User's favorited locations
+$sql = "SELECT user_has_favorite.favorite_id, location.location_id
+FROM user_has_favorite
+INNER JOIN location
+ON user_has_favorite.location_id = location.location_id
+WHERE user_has_favorite.user_id = ?
+ORDER BY location.name;";
+$stmt = $mysqli->prepare($sql);
+$id = $_SESSION["id"];
+$stmt->bind_param("i", $id);
+$favorites = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
+
+for ($i = 0; $i < count($locations); $i++) {
+    for ($j = 0; $j < count($favorites); $j++) {
+        if ($locations[$i]["location_id"] == $favorites[$j]["location_id"]) {
+            $locations[$i]["favorite_id"] = $favorites[$j]["favorite_id"];
+            break;
+        }
+    }
+}
 
 // Restaurants for day query
 $sql = "SELECT restaurant.restaurant_id AS res_id, name, cuisine FROM restaurant INNER JOIN restaurant_has_day
@@ -111,14 +132,18 @@ $mysqli->close();
                         <div id="destinations-container" class="px-0">
                             <ul id="destinations" class="list-group list-group-flush w-100">
                                 <?php foreach ($locations as $loc) : ?>
-                                    <li class="list-group-item px-0 border-0" data-image=<?php echo $loc["image_url"] ?> data-alt=<?php echo $locations[0]["name"] ?>>
+                                    <li class="list-group-item px-0 border-0" data-image=<?php echo $loc["image_url"] ?> data-alt=<?php echo $loc["name"] ?>>
                                         <div class="list-item">
                                             <div class="location-name pl-3 pr-sm-2 pr-md-3">
                                                 <?php echo $loc["name"] ?>
                                             </div>
                                             <?php if(isset($_SESSION["email"])): ?>
                                             <div class="my-auto pl-3">
-                                                <i class="star bi bi-star" aria-hidden="true"></i>
+                                                <?php if(isset($loc["favorite_id"])): ?>
+                                                    <i class="star bi bi-star-fill" data-loc=<?php echo $loc["location_id"] ?> data-fav=<?php echo $loc["favorite_id"] ?> aria-hidden="true"></i>
+                                                <?php else: ?>
+                                                    <i class="star bi bi-star" data-loc=<?php echo $loc["location_id"] ?> aria-hidden="true"></i>
+                                                <?php endif; ?>
                                             </div>
                                             <?php endif; ?>
                                         </div>

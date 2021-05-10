@@ -31,7 +31,7 @@ function processQuery($mysqli, $stmt)
     return $results;
 }
 
-$sql = "SELECT * FROM sinhan_road_trip.restaurant ORDER BY upvotes DESC;";
+$sql = "SELECT * FROM sinhan_road_trip.restaurant ORDER BY upvotes DESC LIMIT 10;";
 $stmt = $mysqli->prepare($sql);
 $result = processQuery($mysqli, $stmt);
 
@@ -121,7 +121,7 @@ $mysqli->close();
 <body>
 	<?php include ('navbar.php'); ?>
 	<div class="container-fluid mt-1 mt-lg-0 px-lg-5 pb-sm-5 mb-sm-5">
-		<h1 class="text-center mt-5">Upvoted Restaurants</h1>
+		<h1 class="text-center mt-5">Most Upvoted Restaurants</h1>
 		<div class="row mt-5 mx-auto px-lg-5">
 			<div id="upvotes-list" class="col-sm-12 col-md-6 col-lg-6">
 				<ul class="list-group list-group-flush"> 

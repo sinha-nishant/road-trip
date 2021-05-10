@@ -12,6 +12,7 @@ function changeImage(newImage) {
     }
 }
 
+// Change image on hover over different item in destination list
 let destinations = document.querySelector("#destinations").children;
 for (let i = 0; i < destinations.length; i++) {
     destinations[i].onmouseenter = function () {
@@ -20,13 +21,31 @@ for (let i = 0; i < destinations.length; i++) {
 }
 
 $(".star").click(function (event) {
-    if ($(this).hasClass("bi-star")) {
-        $(this).removeClass("bi-star");
-        $(this).addClass("bi-star-fill");
-        $(this).css("transition-duration", "1s");
+    let icon = $(this);
+    if (icon.hasClass("bi-star")) {
+        // jquery AJAX PHP
+        // Add favorite
+        $.post("favorite.php", {'location_id': icon.data("loc")}, function(response) {
+            if (response == "unsuccessful") {
+                alert("Could not favorite.")
+            } else {
+                icon.data("fav", response);
+                icon.removeClass("bi-star");
+                icon.addClass("bi-star-fill");
+                icon.css("transition-duration", "1s");
+            }
+        });
     } else {
-        $(this).removeClass("bi-star-fill");
-        $(this).addClass("bi-star");
+        // jquery AJAX PHP
+        // Remove favorite
+        $.post("favorite.php", {'favorite_id': icon.data("fav")}, function(response) {
+            if (response == "unsuccessful") {
+                alert("Could not remove favorite.")
+            } else {
+                icon.removeClass("bi-star-fill");
+                icon.addClass("bi-star");
+            }
+        });
     }
 });
 
@@ -61,6 +80,7 @@ $(".arrow").click(function (event) {
 
 $(function() {
     $("#path > iframe").on("load", function() {
+        // Anime.js
         anime({
             targets: '.col-lg',
             top: 0,
@@ -77,6 +97,7 @@ $(function() {
     });
 });
 
+// Card glow and scale on hover
 $(".card, #path").mouseenter(function(event) {
     if ($(window).width() >= 992) {
         $(this).css("box-shadow", "0px 0px 7px #03dac6")
