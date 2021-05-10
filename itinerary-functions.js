@@ -1,17 +1,20 @@
 function changeImage(newImage) {
     let image = document.querySelector("img");
-    let old_width = image.width;
-    let old_height = image.height;
-    image.alt = newImage.dataset.alt;
 
-    image.src = newImage.dataset.image;
-    image.width = old_width;
-    image.height = old_height;
+    if (image.src != newImage.dataset.image) {
+        let old_width = image.width;
+        let old_height = image.height;
+        image.alt = newImage.dataset.alt;
+
+        image.src = newImage.dataset.image;
+        image.width = old_width;
+        image.height = old_height;
+    }
 }
 
 let destinations = document.querySelector("#destinations").children;
 for (let i = 0; i < destinations.length; i++) {
-    destinations[i].onmouseover = function () {
+    destinations[i].onmouseenter = function () {
         changeImage(destinations[i]);
     };
 }
@@ -30,13 +33,29 @@ $(".star").click(function (event) {
 $(".arrow").click(function (event) {
     event.stopPropagation();
     // If restaurant not upvoted
-    if ($(this).hasClass("bi-arrow-up-circle")) {
-        $(this).removeClass("bi-arrow-up-circle");
-        $(this).addClass("bi-arrow-up-circle-fill");
-        $(this).css("transition-duration", "0.5s");
+    let arrow = $(this);
+    if (arrow.hasClass("bi-arrow-up-circle")) {
+        // jQuery AJAX PHP
+        $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote': true}, function(response) {
+            if (response != "successful") {
+                alert("Database error: Could not upvote");
+            } else {
+                arrow.removeClass("bi-arrow-up-circle");
+                arrow.addClass("bi-arrow-up-circle-fill");
+                arrow.css("transition-duration", "0.5s");
+            }
+        });
+
     } else {
-        $(this).removeClass("bi-arrow-up-circle-fill");
-        $(this).addClass("bi-arrow-up-circle");
+        // jQuery AJAX PHP
+        $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote': false}, function(response) {
+            if (response != "successful") {
+                alert("Database error: Could not remove upvote");
+            } else {
+                arrow.removeClass("bi-arrow-up-circle-fill");
+                arrow.addClass("bi-arrow-up-circle");
+            }
+        });
     }
 });
 
