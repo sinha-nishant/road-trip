@@ -33,9 +33,29 @@ function processQuery($mysqli, $stmt)
 
 $sql = "SELECT * FROM sinhan_road_trip.restaurant ORDER BY upvotes DESC LIMIT 10;";
 $stmt = $mysqli->prepare($sql);
-$result = processQuery($mysqli, $stmt);
+$restaurants = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
 
+// User's upvoted restaurants
+if (isset($_SESSION["id"])) {
+    $user_id = $_SESSION["id"];
+    $sql = "SELECT user_has_upvote.upvote_id, restaurant.restaurant_id
+    FROM user_has_upvote
+    INNER JOIN restaurant
+    ON user_has_upvote.restaurant_id = restaurant.restaurant_id
+    WHERE user_has_upvote.user_id = ?;";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $upvotes = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
 
+    for ($i = 0; $i < count($restaurants); $i++) {
+        for ($j = 0; $j < count($upvotes); $j++) {
+            if ($restaurants[$i]["restaurant_id"] == $upvotes[$j]["restaurant_id"]) {
+                $restaurants[$i]["upvote_id"] = $upvotes[$j]["upvote_id"];
+                break;
+            }
+        }
+    }
+}
 
 $mysqli->close();
 ?>
@@ -127,14 +147,20 @@ $mysqli->close();
 		<div class="row mt-5 mx-auto px-lg-5">
 			<div id="upvotes-list" class="col-sm-12 col-md-6 col-lg-6">
 				<ul class="list-group list-group-flush"> 
-					<?php foreach ($result as $res) : ?>
+					<?php foreach ($restaurants as $res) : ?>
 						<li class="list-group-item px-3 border-0 rounded-pill h3" data-image=<?php echo $res["image_url"] ?>>
 							<div class="list-item pl-0">
 								<div class="pl-0 col-8"><?php echo $res["name"] ?></div>
 								<div class="col-4 my-auto d-flex justify-content-end"><span id=<?php echo $res["restaurant_id"] ?> class="pr-3"><?php echo $res["upvotes"] ?></span>
 								<?php if(isset($_SESSION["email"])): ?>
 									<div class="my-auto pl-3">
-										<i class="bi bi-arrow-up-circle" aria-hidden="true" data-res=<?php echo $res["restaurant_id"] ?>></i>
+										<!-- <i class="bi bi-arrow-up-circle" aria-hidden="true" data-res=<?php echo $res["restaurant_id"] ?>></i> -->
+
+										<?php if(isset($res["upvote_id"])): ?>
+											<i class="arrow bi bi-arrow-up-circle-fill" data-res=<?php echo $res["restaurant_id"] ?> data-fav=<?php echo $res["upvote_id"] ?> aria-hidden="true"></i>
+										<?php else: ?>
+											<i class="arrow bi bi-arrow-up-circle" data-res=<?php echo $res["restaurant_id"] ?> aria-hidden="true"></i>
+										<?php endif; ?>
 									</div>
 								<?php endif; ?>
 							</div>

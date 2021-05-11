@@ -55,6 +55,7 @@ $(".arrow").click(function (event) {
     let arrow = $(this);
     if (arrow.hasClass("bi-arrow-up-circle")) {
         // jQuery AJAX PHP
+        // Add upvote
         $.post('vote.php',  {'res_id': $(this).data("res")}, function(response) {
             if (response == "unsuccessful") {
                 alert("Database error: Could not upvote");
@@ -68,6 +69,7 @@ $(".arrow").click(function (event) {
 
     } else {
         // jQuery AJAX PHP
+        // Remove upvote
         $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote_id': arrow.attr("data-fav")}, function(response) {
             if (response == "unsuccessful") {
                 alert("Database error: Could not remove upvote");
