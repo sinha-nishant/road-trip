@@ -48,6 +48,8 @@ $pass = hash("sha512", $pass);
 $stmt->bind_param("ss", $email, $pass);
 $stmt->execute();
 
+$_SESSION["id"] = $mysqli->insert_id;
+
 $mysqli->close();
 
 $_SESSION["email"] = $_POST["confirm-email"];

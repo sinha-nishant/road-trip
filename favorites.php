@@ -192,7 +192,12 @@ $mysqli->close();
                     } else {
                         icon.removeClass("bi-star-fill");
                         icon.addClass("bi-star");
-                        icon.parent().parent().parent().fadeOut(400);
+                        icon.parent().parent().parent().fadeOut(400, function() {
+                            icon.parent().parent().parent().remove();
+                            if ($("#favorites-list > ul").children().length == 0) {
+                                $("#preview").attr("src", "https://storage.needpix.com/rsynced_images/star-602148_1280.png");
+                            }
+                        });   
                     }
                 });
             }

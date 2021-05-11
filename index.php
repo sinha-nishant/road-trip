@@ -55,22 +55,24 @@ $stmt->bind_param("i", $day_id);
 $locations = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
 
 // User's favorited locations
-$sql = "SELECT user_has_favorite.favorite_id, location.location_id
-FROM user_has_favorite
-INNER JOIN location
-ON user_has_favorite.location_id = location.location_id
-WHERE user_has_favorite.user_id = ?
-ORDER BY location.name;";
-$stmt = $mysqli->prepare($sql);
-$id = $_SESSION["id"];
-$stmt->bind_param("i", $id);
-$favorites = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
+if (isset($_SESSION["id"])) {
+    $id = $_SESSION["id"];
+    $sql = "SELECT user_has_favorite.favorite_id, location.location_id
+    FROM user_has_favorite
+    INNER JOIN location
+    ON user_has_favorite.location_id = location.location_id
+    WHERE user_has_favorite.user_id = ?
+    ORDER BY location.name;";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $favorites = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
 
-for ($i = 0; $i < count($locations); $i++) {
-    for ($j = 0; $j < count($favorites); $j++) {
-        if ($locations[$i]["location_id"] == $favorites[$j]["location_id"]) {
-            $locations[$i]["favorite_id"] = $favorites[$j]["favorite_id"];
-            break;
+    for ($i = 0; $i < count($locations); $i++) {
+        for ($j = 0; $j < count($favorites); $j++) {
+            if ($locations[$i]["location_id"] == $favorites[$j]["location_id"]) {
+                $locations[$i]["favorite_id"] = $favorites[$j]["favorite_id"];
+                break;
+            }
         }
     }
 }
@@ -82,6 +84,28 @@ WHERE restaurant_has_day.day_id = ?;";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $day_id);
 $restaurants = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
+
+// User's upvoted restaurants
+if (isset($_SESSION["id"])) {
+    $id = $_SESSION["id"];
+    $sql = "SELECT user_has_upvote.upvote_id, restaurant.restaurant_id
+    FROM user_has_upvote
+    INNER JOIN restaurant
+    ON user_has_upvote.restaurant_id = restaurant.restaurant_id
+    WHERE user_has_upvote.user_id = ?;";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $upvotes = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
+
+    for ($i = 0; $i < count($restaurants); $i++) {
+        for ($j = 0; $j < count($upvotes); $j++) {
+            if ($restaurants[$i]["res_id"] == $upvotes[$j]["restaurant_id"]) {
+                $restaurants[$i]["upvote_id"] = $upvotes[$j]["upvote_id"];
+                break;
+            }
+        }
+    }
+}
 
 $mysqli->close();
 ?>
