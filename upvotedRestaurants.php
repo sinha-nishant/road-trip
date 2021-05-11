@@ -166,10 +166,12 @@ $mysqli->close();
 			numUpvotes = parseInt($("#" + $(icon).data("res")).text());
 			if ($(icon).hasClass("bi-arrow-up-circle")) {
 				// jQuery AJAX PHP
-				$.post('vote.php',  {'res_id': $(icon).data("res"), 'upvote': true}, function(response) {
-					if (response != "successful") {
+				// Add upvote
+				$.post('vote.php', {'res_id': $(icon).data("res")}, function(response) {
+					if (response == "unsuccessful") {
 						alert("Database error: Could not upvote");
 					} else {
+						icon.attr("data-fav", response);
 						$("#" + $(icon).data("res")).text(numUpvotes + 1)
 						$(icon).removeClass("bi-arrow-up-circle");
 						$(icon).addClass("bi-arrow-up-circle-fill");
@@ -179,8 +181,9 @@ $mysqli->close();
 			}
 			else {
 				// jQuery AJAX PHP
-				$.post('vote.php',  {'res_id': $(icon).data("res"), 'upvote': false}, function(response) {
-					if (response != "successful") {
+				// Remove upvote
+				$.post('vote.php', {'upvote_id': $(icon).attr("data-fav"), 'res_id': $(icon).data("res")}, function(response) {
+					if (response == "unsuccessful") {
 						alert("Database error: Could not remove upvote");
 					} else {
 						$("#" + $(icon).data("res")).text(numUpvotes - 1)
