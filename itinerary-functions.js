@@ -55,10 +55,11 @@ $(".arrow").click(function (event) {
     let arrow = $(this);
     if (arrow.hasClass("bi-arrow-up-circle")) {
         // jQuery AJAX PHP
-        $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote': true}, function(response) {
-            if (response != "successful") {
+        $.post('vote.php',  {'res_id': $(this).data("res")}, function(response) {
+            if (response == "unsuccessful") {
                 alert("Database error: Could not upvote");
             } else {
+                arrow.attr("data-fav", response);
                 arrow.removeClass("bi-arrow-up-circle");
                 arrow.addClass("bi-arrow-up-circle-fill");
                 arrow.css("transition-duration", "0.5s");
@@ -67,8 +68,8 @@ $(".arrow").click(function (event) {
 
     } else {
         // jQuery AJAX PHP
-        $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote': false}, function(response) {
-            if (response != "successful") {
+        $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote_id': arrow.attr("data-fav")}, function(response) {
+            if (response == "unsuccessful") {
                 alert("Database error: Could not remove upvote");
             } else {
                 arrow.removeClass("bi-arrow-up-circle-fill");

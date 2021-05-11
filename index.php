@@ -212,7 +212,11 @@ $mysqli->close();
                                             <tr>
                                                 <td>
                                                     <?php if(isset($_SESSION["email"])): ?>
-                                                        <i class="arrow bi bi-arrow-up-circle" data-res=<?php echo $res["res_id"] ?> aria-hidden="true"></i>
+                                                        <?php if(isset($res["upvote_id"])): ?>
+                                                            <i class="arrow bi bi-arrow-up-circle-fill" data-res=<?php echo $res["res_id"] ?> data-fav=<?php echo $res["upvote_id"] ?> aria-hidden="true"></i>
+                                                        <?php else: ?>
+                                                            <i class="arrow bi bi-arrow-up-circle" data-res=<?php echo $res["res_id"] ?> aria-hidden="true"></i>
+                                                        <?php endif; ?>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td><?php echo $res['name'] ?></td>

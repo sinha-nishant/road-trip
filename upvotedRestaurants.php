@@ -35,6 +35,8 @@ $sql = "SELECT * FROM sinhan_road_trip.restaurant ORDER BY upvotes DESC LIMIT 10
 $stmt = $mysqli->prepare($sql);
 $result = processQuery($mysqli, $stmt);
 
+
+
 $mysqli->close();
 ?>
 <!DOCTYPE html>
