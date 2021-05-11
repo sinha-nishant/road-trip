@@ -154,10 +154,8 @@ $mysqli->close();
 								<div class="col-4 my-auto d-flex justify-content-end"><span id=<?php echo $res["restaurant_id"] ?> class="pr-3"><?php echo $res["upvotes"] ?></span>
 								<?php if(isset($_SESSION["email"])): ?>
 									<div class="my-auto pl-3">
-										<!-- <i class="bi bi-arrow-up-circle" aria-hidden="true" data-res=<?php echo $res["restaurant_id"] ?>></i> -->
-
 										<?php if(isset($res["upvote_id"])): ?>
-											<i class="arrow bi bi-arrow-up-circle-fill" data-res=<?php echo $res["restaurant_id"] ?> data-fav=<?php echo $res["upvote_id"] ?> aria-hidden="true"></i>
+											<i class="arrow bi bi-arrow-up-circle-fill" data-res=<?php echo $res["restaurant_id"] ?> data-upvote=<?php echo $res["upvote_id"] ?> aria-hidden="true"></i>
 										<?php else: ?>
 											<i class="arrow bi bi-arrow-up-circle" data-res=<?php echo $res["restaurant_id"] ?> aria-hidden="true"></i>
 										<?php endif; ?>
@@ -199,7 +197,7 @@ $mysqli->close();
 					if (response == "unsuccessful") {
 						alert("Database error: Could not upvote");
 					} else {
-						icon.attr("data-fav", response);
+						icon.attr("data-upvote", response);
 						$("#" + $(icon).data("res")).text(numUpvotes + 1)
 						$(icon).removeClass("bi-arrow-up-circle");
 						$(icon).addClass("bi-arrow-up-circle-fill");
@@ -210,7 +208,7 @@ $mysqli->close();
 			else {
 				// jQuery AJAX PHP
 				// Remove upvote
-				$.post('vote.php', {'upvote_id': $(icon).attr("data-fav"), 'res_id': $(icon).data("res")}, function(response) {
+				$.post('vote.php', {'upvote_id': $(icon).attr("data-upvote"), 'res_id': $(icon).data("res")}, function(response) {
 					if (response == "unsuccessful") {
 						alert("Database error: Could not remove upvote");
 					} else {

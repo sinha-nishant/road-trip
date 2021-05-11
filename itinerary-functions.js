@@ -60,7 +60,7 @@ $(".arrow").click(function (event) {
             if (response == "unsuccessful") {
                 alert("Database error: Could not upvote");
             } else {
-                arrow.attr("data-fav", response);
+                arrow.attr("data-upvote", response);
                 arrow.removeClass("bi-arrow-up-circle");
                 arrow.addClass("bi-arrow-up-circle-fill");
                 arrow.css("transition-duration", "0.5s");
@@ -70,7 +70,7 @@ $(".arrow").click(function (event) {
     } else {
         // jQuery AJAX PHP
         // Remove upvote
-        $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote_id': arrow.attr("data-fav")}, function(response) {
+        $.post('vote.php',  {'res_id': $(this).data("res"), 'upvote_id': arrow.attr("data-upvote")}, function(response) {
             if (response == "unsuccessful") {
                 alert("Database error: Could not remove upvote");
             } else {
