@@ -1,5 +1,5 @@
 .row {
-    opacity: 0
+    opacity: 0;
 }
 
 .col-lg {
@@ -79,6 +79,11 @@ thead {
     top: 0%;
 }
 
+.resName:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .bi-arrow-up-circle:hover {
     cursor: pointer;
 }
@@ -110,7 +115,8 @@ thead {
         max-height: 30vh;
     }
 
-    .hotel, .food {
+    .hotel,
+    .food {
         margin-left: auto;
         margin-right: auto;
         width: 100%;

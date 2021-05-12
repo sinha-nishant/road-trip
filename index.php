@@ -220,7 +220,9 @@ $mysqli->close();
                                                         <?php endif; ?>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td><?php echo $res['name'] ?></td>
+                                                <td class="resName" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($res["name"] . "+" . $region_name . "+" . $res['cuisine'] . "+" . "food") ?>>
+                                                    <?php echo $res['name'] ?>
+                                                </td>
                                                 <td><?php echo $res['cuisine'] ?></td>
                                             </tr>
                                         <?php endforeach; ?>

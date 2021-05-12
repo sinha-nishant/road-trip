@@ -136,6 +136,11 @@ $(".card, #path").mouseleave(function (event) {
 });
 
 // Open google map query for destination
-$(".list-group-item").click(function(event) {
+$(".list-group-item").click(function (event) {
+    open($(this).data("gmap"));
+});
+
+// Open google map query for restaurant
+$(".resName").click(function (event) {
     open($(this).data("gmap"));
 });
