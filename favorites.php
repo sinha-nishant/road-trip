@@ -36,10 +36,10 @@ function processQuery($mysqli, $stmt)
     return $results;
 }
 
-$sql = "SELECT user_has_favorite.favorite_id, location.location_id, location.name, image_url
+$sql = "SELECT region_name, user_has_favorite.favorite_id, location.location_id, location.name, image_url
 FROM user_has_favorite
-INNER JOIN location
-ON user_has_favorite.location_id = location.location_id
+INNER JOIN location ON user_has_favorite.location_id = location.location_id
+INNER JOIN day ON location.day_id = day.day_id
 WHERE user_has_favorite.user_id = ?
 ORDER BY location.name;";
 $stmt = $mysqli->prepare($sql);
@@ -100,6 +100,7 @@ $mysqli->close();
             color: white;
             transform: scale(1);
             transition-duration: 0.5s;
+            cursor: pointer;
         }
 
         .location-name {
@@ -137,7 +138,7 @@ $mysqli->close();
             <div id="favorites-list" class="col-sm-12 col-md-6 col-lg-5 pe-5">
                 <ul class="list-group list-group-flush">
                     <?php foreach ($result as $loc) : ?>
-                        <li class="list-group-item border-0 rounded-pill h3" data-image=<?php echo $loc["image_url"] ?>>
+                        <li class="list-group-item border-0 rounded-pill h3" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $loc["region_name"]) ?> data-image=<?php echo $loc["image_url"] ?>>
                             <div class="list-item">
                                 <div class="location-name pr-sm-2 pr-md-3">
                                     <?php echo $loc["name"] ?>
@@ -156,6 +157,11 @@ $mysqli->close();
         </div>
     </div>
     <script>
+        // Open google map query for destination
+        $(".list-group-item").click(function(event) {
+            open($(this).data("gmap"));
+        });
+
         // Change image shown on list item mouseenter
         $(".list-group-item").mouseenter(function(event) {
             if ($(window).width() >= 768) {
@@ -170,11 +176,14 @@ $mysqli->close();
         });
 
         $("i").click(function(event) {
+            event.stopPropagation();
             let icon = $(this);
             if (icon.hasClass("bi-star")) {
                 // jquery AJAX PHP
                 // Add favorite
-                $.post("favorite.php", {'location_id': icon.data("loc")}, function(response) {
+                $.post("favorite.php", {
+                    'location_id': icon.data("loc")
+                }, function(response) {
                     if (response == "unsuccessful") {
                         alert("Could not favorite.");
                     } else {
@@ -186,7 +195,9 @@ $mysqli->close();
             } else {
                 // jquery AJAX PHP
                 // Remove favorite
-                $.post("favorite.php", {'favorite_id': icon.data("fav")}, function(response) {
+                $.post("favorite.php", {
+                    'favorite_id': icon.data("fav")
+                }, function(response) {
                     if (response == "unsuccessful") {
                         alert("Could not remove favorite.");
                     } else {
@@ -197,7 +208,7 @@ $mysqli->close();
                             if ($("#favorites-list > ul").children().length == 0) {
                                 $("#preview").attr("src", "https://storage.needpix.com/rsynced_images/star-602148_1280.png");
                             }
-                        });   
+                        });
                     }
                 });
             }

@@ -69,15 +69,15 @@ $mysqli->close();
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <?php if (!isset($_SESSION["email"])): ?>
+                <?php if (!isset($_SESSION["email"])) : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="createAccount.php">Create Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.php">Login</a>
-                     </li>
+                    </li>
                 <?php endif; ?>
-                <?php if (isset($_SESSION["email"])): ?>
+                <?php if (isset($_SESSION["email"])) : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?php echo $_SESSION["email"] ?>
@@ -86,8 +86,8 @@ $mysqli->close();
                             <a class="dropdown-item" href="logout.php">Logout</a>
                         </div>
                     </li>
-                <?php endif; ?> 
-                
+                <?php endif; ?>
+
                 <li class="nav-item">
                     <a class="nav-link" href="favorites.php">Favorites</a>
                 </li>
@@ -96,7 +96,11 @@ $mysqli->close();
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Itinerary
+                        <?php if ($_SERVER['SCRIPT_NAME'] == "/index.php") : ?>
+                            Itinerary - Day <?php echo $day_id ?>
+                        <?php else : ?>
+                            Itinerary
+                        <?php endif; ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php foreach ($days as $day) : ?>

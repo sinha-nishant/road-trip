@@ -44,6 +44,7 @@
 .list-group-item:hover {
     background-color: black;
     color: white;
+    cursor: pointer;
 }
 
 .bi-star-fill {
@@ -76,6 +77,14 @@
 thead {
     position: sticky;
     top: 0%;
+}
+
+.bi-arrow-up-circle:hover {
+    cursor: pointer;
+}
+
+.bi-arrow-up-circle-fill:hover {
+    cursor: pointer;
 }
 
 .bi-arrow-up-circle-fill {

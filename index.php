@@ -80,7 +80,8 @@ if (isset($_SESSION["id"])) {
 // Restaurants for day query
 $sql = "SELECT restaurant.restaurant_id AS res_id, name, cuisine FROM restaurant INNER JOIN restaurant_has_day
 ON restaurant.restaurant_id = restaurant_has_day.restaurant_id
-WHERE restaurant_has_day.day_id = ?;";
+WHERE restaurant_has_day.day_id = ?
+ORDER BY name;";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $day_id);
 $restaurants = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
@@ -113,7 +114,7 @@ $mysqli->close();
 <html>
 
 <head>
-    <title>Road Trip</title>
+    <title>Road Trip Day <?php echo $day_id . " - " . $region_name ?></title>
     <lang="en" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -156,19 +157,19 @@ $mysqli->close();
                         <div id="destinations-container" class="px-0">
                             <ul id="destinations" class="list-group list-group-flush w-100">
                                 <?php foreach ($locations as $loc) : ?>
-                                    <li class="list-group-item px-0 border-0" data-image=<?php echo $loc["image_url"] ?> data-alt=<?php echo $loc["name"] ?>>
+                                    <li class="list-group-item px-0 border-0" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $region_name) ?> data-image=<?php echo $loc["image_url"] ?> data-alt=<?php echo $loc["name"] ?>>
                                         <div class="list-item">
                                             <div class="location-name pl-3 pr-sm-2 pr-md-3">
                                                 <?php echo $loc["name"] ?>
                                             </div>
-                                            <?php if(isset($_SESSION["email"])): ?>
-                                            <div class="my-auto pl-3">
-                                                <?php if(isset($loc["favorite_id"])): ?>
-                                                    <i class="star bi bi-star-fill" data-loc=<?php echo $loc["location_id"] ?> data-fav=<?php echo $loc["favorite_id"] ?> aria-hidden="true"></i>
-                                                <?php else: ?>
-                                                    <i class="star bi bi-star" data-loc=<?php echo $loc["location_id"] ?> aria-hidden="true"></i>
-                                                <?php endif; ?>
-                                            </div>
+                                            <?php if (isset($_SESSION["email"])) : ?>
+                                                <div class="my-auto pl-3">
+                                                    <?php if (isset($loc["favorite_id"])) : ?>
+                                                        <i class="star bi bi-star-fill" data-loc=<?php echo $loc["location_id"] ?> data-fav=<?php echo $loc["favorite_id"] ?> aria-hidden="true"></i>
+                                                    <?php else : ?>
+                                                        <i class="star bi bi-star" data-loc=<?php echo $loc["location_id"] ?> aria-hidden="true"></i>
+                                                    <?php endif; ?>
+                                                </div>
                                             <?php endif; ?>
                                         </div>
                                     </li>
@@ -211,10 +212,10 @@ $mysqli->close();
                                         <?php foreach ($restaurants as $res) : ?>
                                             <tr>
                                                 <td>
-                                                    <?php if(isset($_SESSION["email"])): ?>
-                                                        <?php if(isset($res["upvote_id"])): ?>
+                                                    <?php if (isset($_SESSION["email"])) : ?>
+                                                        <?php if (isset($res["upvote_id"])) : ?>
                                                             <i class="arrow bi bi-arrow-up-circle-fill" data-res=<?php echo $res["res_id"] ?> data-upvote=<?php echo $res["upvote_id"] ?> aria-hidden="true"></i>
-                                                        <?php else: ?>
+                                                        <?php else : ?>
                                                             <i class="arrow bi bi-arrow-up-circle" data-res=<?php echo $res["res_id"] ?> aria-hidden="true"></i>
                                                         <?php endif; ?>
                                                     <?php endif; ?>
