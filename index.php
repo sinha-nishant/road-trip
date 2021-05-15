@@ -108,6 +108,7 @@ $mysqli->close();
 <html>
 
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <title>Road Trip Day <?php echo $day_id . " - " . $region_name ?></title>
     <lang="en" />
     <meta charset="utf-8" />
