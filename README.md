@@ -41,4 +41,4 @@ I'd like to maintain a mostly minimal color scheme composed of black and white. 
 
 ## Database Diagram
 
-<img width="639" alt="ERD" src="https://user-images.githubusercontent.com/46798485/114258712-72263380-997d-11eb-8c57-4b8c9618ab69.png">
+<img width="1015" alt="ERD" src="https://user-images.githubusercontent.com/46798485/118374467-0f721a00-b571-11eb-8c16-20b9bc49ad2b.png">
