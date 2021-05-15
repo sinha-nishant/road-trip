@@ -1,12 +1,7 @@
 <?php
-// establish DB connection
-$host = "303.itpwebdev.com";
-$user = "sinhan_db_user";
-$password = "uscItp2021";
-$db = "sinhan_road_trip";
 
-// to use MySQLi extension
-$mysqli = new mysqli($host, $user, $password, $db);
+// establish DB connection
+$mysqli = new mysqli(getenv("HOST"), getenv("USER"), getenv("PASSWORD"), getenv("DB"));
 
 // returns error code from db connection call
 if ($mysqli->connect_error) {
