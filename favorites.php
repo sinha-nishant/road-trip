@@ -7,7 +7,7 @@ if (!isset($_SESSION["id"])) {
 }
 
 // to use MySQLi extension
-$mysqli = new mysqli(getenv("HOST"), getenv("USER"), getenv("PASSWORD"), getenv("DB"));
+$mysqli = new mysqli(getenv("HOST"), getenv("DB_USER"), getenv("PASSWORD"), getenv("DB"));
 
 // returns error code from db connection call
 if ($mysqli->connect_error) {

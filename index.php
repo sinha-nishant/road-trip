@@ -1,17 +1,8 @@
 <?php
 session_start();
 
-$host = getenv("HOST");
-var_dump("HOST " . $host);
-$user = getenv("USER");
-var_dump("user " . $user);
-$pass = getenv("PASSWORD");
-var_dump("pass " . $pass);
-$db = getenv("DB");
-var_dump("DB " . $db);
-
 // to use MySQLi extension
-$mysqli = new mysqli(getenv("HOST"), getenv("USER"), getenv("PASSWORD"), getenv("DB"));
+$mysqli = new mysqli(getenv("HOST"), getenv("DB_USER"), getenv("PASSWORD"), getenv("DB"));
 
 // returns error code from db connection call
 if ($mysqli->connect_error) {
