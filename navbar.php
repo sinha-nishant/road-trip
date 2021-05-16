@@ -34,7 +34,6 @@ $mysqli->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navbar</title>
-    <lang="en" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -53,6 +52,8 @@ $mysqli->close();
             color: white;
         }
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 
@@ -105,14 +106,11 @@ $mysqli->close();
                         <?php endforeach; ?>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="https://drive.google.com/drive/folders/1GZp8hDEIsNs5e5D1azbRk5MApKUEtsk-?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i> Folder</a>
+                </li>
             </ul>
         </div>
     </nav>
-    <script>
-        $("#email").mouseenter(function() {
-            $("#email > a").text("Logout");
-        });
-    </script>
 </body>
-
 </html>
