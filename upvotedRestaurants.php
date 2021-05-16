@@ -62,7 +62,6 @@ $mysqli->close();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Upvoted Restaurants</title>
-	<lang="en" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -79,7 +78,7 @@ $mysqli->close();
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 
 	<!-- anime.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="node_modules/animejs/lib/anime.min.js"></script>
 
 	<style>
 		body {
@@ -105,7 +104,8 @@ $mysqli->close();
 			color: white;
 			transform: scale(1);
 			transition-duration: 0.5s;
-		}
+            cursor: pointer;
+        }
 
 		.bi-arrow-up-circle-fill {
 			color: #03DAC6;
@@ -143,7 +143,7 @@ $mysqli->close();
 			<div id="upvotes-list" class="col-sm-12 col-md-6 col-lg-6">
 				<ul class="list-group list-group-flush">
 					<?php foreach ($restaurants as $res) : ?>
-						<li class="list-group-item px-3 border-0 rounded-pill h3" data-image=<?php echo $res["image_url"] ?>>
+						<li class="list-group-item px-3 border-0 rounded-pill h3" data-image="<?php echo $res["image_url"] ?>" data-gmap="<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($res["name"]) ?>">
 							<div class="list-item pl-0">
 								<div class="pl-0 col-8"><?php echo $res["name"] ?></div>
 								<div class="col-4 my-auto d-flex justify-content-end"><span id=<?php echo $res["restaurant_id"] ?> class="pr-3"><?php echo $res["upvotes"] ?></span>
@@ -167,58 +167,67 @@ $mysqli->close();
 		</div>
 	</div>
 	<script>
-		$(".list-group-item").mouseenter(function(event) {
+
+        let items = $(".list-group-item");
+
+        // Open google map query for destination
+        items.on("click", function() {
+            open($(this).data("gmap"));
+        });
+
+        items.on("mouseenter", function() {
 			if ($(window).width() >= 768) {
-				item = $(this);
-				if ($(item).data("image") != $("#img-preview").attr("src")) {
-					$("#img-preview").fadeOut(400, function() {
-						$("#img-preview").attr("src", $(item).data("image"));
-						$("#img-preview").fadeIn(400);
+				let item = $(this);
+				let preview = $("#img-preview");
+				if (item.data("image") !== preview.attr("src")) {
+					preview.fadeOut(400, function() {
+						preview.attr("src", item.data("image"));
+						preview.fadeIn(400);
 					});
 				}
 			}
 		});
 
-		$("i").click(function(event) {
+		$("i").on("click", function(event) {
 			event.stopPropagation();
 			// If user has not upvoted restaurant
 			let icon = $(this);
-			numUpvotes = parseInt($("#" + $(icon).data("res")).text());
-			if ($(icon).hasClass("bi-arrow-up-circle")) {
+			let numUpvotes = parseInt($("#" + icon.data("res")).text());
+			if (icon.hasClass("bi-arrow-up-circle")) {
 				// jQuery AJAX PHP
 				// Add upvote
 				$.post('vote.php', {
-					'res_id': $(icon).data("res")
+					'res_id': icon.data("res")
 				}, function(response) {
-					if (response == "unsuccessful") {
+					if (response === "unsuccessful") {
 						alert("Database error: Could not upvote");
 					} else {
 						icon.attr("data-upvote", response);
-						$("#" + $(icon).data("res")).text(numUpvotes + 1)
-						$(icon).removeClass("bi-arrow-up-circle");
-						$(icon).addClass("bi-arrow-up-circle-fill");
-						$(icon).css("transition-duration", "1s");
+						$("#" + icon.data("res")).text(numUpvotes + 1);
+						icon.removeClass("bi-arrow-up-circle");
+						icon.addClass("bi-arrow-up-circle-fill");
+						icon.css("transition-duration", "1s");
 					}
 				});
 			} else {
 				// jQuery AJAX PHP
 				// Remove upvote
 				$.post('vote.php', {
-					'upvote_id': $(icon).attr("data-upvote"),
-					'res_id': $(icon).data("res")
+					'upvote_id': icon.attr("data-upvote"),
+					'res_id': icon.data("res")
 				}, function(response) {
-					if (response == "unsuccessful") {
+					if (response === "unsuccessful") {
 						alert("Database error: Could not remove upvote");
 					} else {
-						$("#" + $(icon).data("res")).text(numUpvotes - 1)
-						$(icon).removeClass("bi-arrow-up-circle-fill");
-						$(icon).addClass("bi-arrow-up-circle");
+						$("#" + icon.data("res")).text(numUpvotes - 1)
+						icon.removeClass("bi-arrow-up-circle-fill");
+						icon.addClass("bi-arrow-up-circle");
 					}
 				});
 			}
 		});
 
-		// Middle to top slide list animation
+        // Middle to top slide list animation
 		anime({
 			targets: '.list-group-item',
 			opacity: 100,

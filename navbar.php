@@ -110,7 +110,7 @@ $mysqli->close();
                         <?php endforeach; ?>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item">
                     <a class="nav-link" href="https://drive.google.com/drive/folders/1GZp8hDEIsNs5e5D1azbRk5MApKUEtsk-?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i>Folder</a>
                 </li>
             </ul>

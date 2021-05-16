@@ -52,7 +52,6 @@ $mysqli->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Favorites</title>
-    <lang="en" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -69,7 +68,7 @@ $mysqli->close();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 
     <!-- anime.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="node_modules/animejs/lib/anime.min.js"></script>
 
     <style>
         body {
@@ -133,7 +132,7 @@ $mysqli->close();
             <div id="favorites-list" class="col-sm-12 col-md-6 col-lg-5 pe-5">
                 <ul class="list-group list-group-flush">
                     <?php foreach ($result as $loc) : ?>
-                        <li class="list-group-item border-0 rounded-pill h3" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $loc["region_name"]) ?> data-image=<?php echo $loc["image_url"] ?>>
+                        <li class="list-group-item border-0 rounded-pill h3" data-gmap="<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $loc["region_name"]) ?>" data-image="<?php echo $loc["image_url"] ?>">
                             <div class="list-item">
                                 <div class="location-name pr-sm-2 pr-md-3">
                                     <?php echo $loc["name"] ?>
@@ -152,25 +151,29 @@ $mysqli->close();
         </div>
     </div>
     <script>
+
+        let items = $(".list-group-item");
+
         // Open google map query for destination
-        $(".list-group-item").click(function(event) {
+        items.on("click", function() {
             open($(this).data("gmap"));
         });
 
         // Change image shown on list item mouseenter
-        $(".list-group-item").mouseenter(function(event) {
+        items.on("mouseenter", function() {
             if ($(window).width() >= 768) {
-                item = $(this);
-                if ($(item).data("image") != $("#preview").attr("src")) {
-                    $("#preview").fadeOut(400, function() {
-                        $("#preview").attr("src", $(item).data("image"));
-                        $("#preview").fadeIn(400);
+                let item = $(this);
+                let preview = $("#preview");
+                if ($(item).data("image") !== preview.attr("src")) {
+                    preview.fadeOut(400, function() {
+                        preview.attr("src", $(item).data("image"));
+                        preview.fadeIn(400);
                     });
                 }
             }
         });
 
-        $("i").click(function(event) {
+        $("i").on("click", function(event) {
             event.stopPropagation();
             let icon = $(this);
             if (icon.hasClass("bi-star")) {
@@ -179,7 +182,7 @@ $mysqli->close();
                 $.post("favorite.php", {
                     'location_id': icon.data("loc")
                 }, function(response) {
-                    if (response == "unsuccessful") {
+                    if (response === "unsuccessful") {
                         alert("Could not favorite.");
                     } else {
                         icon.removeClass("bi-star");
@@ -193,14 +196,14 @@ $mysqli->close();
                 $.post("favorite.php", {
                     'favorite_id': icon.data("fav")
                 }, function(response) {
-                    if (response == "unsuccessful") {
+                    if (response === "unsuccessful") {
                         alert("Could not remove favorite.");
                     } else {
                         icon.removeClass("bi-star-fill");
                         icon.addClass("bi-star");
                         icon.parent().parent().parent().fadeOut(400, function() {
                             icon.parent().parent().parent().remove();
-                            if ($("#favorites-list > ul").children().length == 0) {
+                            if ($("#favorites-list > ul").children().length === 0) {
                                 $("#preview").attr("src", "https://storage.needpix.com/rsynced_images/star-602148_1280.png");
                             }
                         });
