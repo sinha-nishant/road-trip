@@ -35,15 +35,22 @@
 }
 
 .list-item {
-    font-size: 18px;
+    font-size: 20px;
     display: flex;
     justify-content: space-between;
-    padding-right: 10%;
+    padding-right: 6%;
 }
 
 .list-group-item:hover {
     background-color: black;
     color: white;
+}
+
+.star {
+    padding-left: 40px;
+}
+
+.star:hover {
     cursor: pointer;
 }
 
@@ -61,7 +68,7 @@
 
 .food {
     padding-top: 1.5%;
-    padding-bottom: 0%;
+    padding-bottom: 0;
     font-size: 18px;
     max-height: 70%;
 }
@@ -76,7 +83,7 @@
 
 thead {
     position: sticky;
-    top: 0%;
+    top: 0;
 }
 
 .resName:hover {
@@ -101,8 +108,30 @@ thead {
     border: 0;
 }
 
+.options {
+    display: flex;
+    box-sizing: border-box;
+    width: 85px;
+    justify-content: flex-end;
+    font-size: 26px;
+}
+
+.location-name {
+    width: 75%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.bi-geo-alt-fill {
+    color: #03DAC6;
+}
+
+.bi-geo-alt-fill:hover {
+    color: #03DAC6;
+}
+
 /* Tablet or smaller */
-@media (max-width: 991.9px) {
+@media (max-width: 992px) {
     .col-lg {
         padding-bottom: 5%;
     }

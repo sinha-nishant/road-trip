@@ -152,20 +152,21 @@ $mysqli->close();
                         <div id="destinations-container" class="px-0">
                             <ul id="destinations" class="list-group list-group-flush w-100">
                                 <?php foreach ($locations as $loc) : ?>
-                                    <li class="list-group-item px-0 border-0" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $region_name) ?> data-image="<?php echo $loc["image_url"] ?>" data-alt="<?php echo $loc["name"] ?>">
+                                    <li class="list-group-item px-0 pt-2 pb-2 border-0" data-image="<?php echo $loc["image_url"] ?>" data-alt="<?php echo $loc["name"] ?>">
                                         <div class="list-item">
-                                            <div class="location-name pl-3 pr-sm-2 pr-md-3">
+                                            <div class="location-name my-auto">
                                                 <?php echo $loc["name"] ?>
                                             </div>
-                                            <?php if (isset($_SESSION["email"])) : ?>
-                                                <div class="my-auto pl-3">
-                                                    <?php if (isset($loc["favorite_id"])) : ?>
-                                                        <i class="star bi bi-star-fill" data-loc="<?php echo $loc["location_id"] ?>" data-fav="<?php echo $loc["favorite_id"] ?>" aria-hidden="true"></i>
-                                                    <?php else : ?>
-                                                        <i class="star bi bi-star" data-loc="<?php echo $loc["location_id"] ?>" aria-hidden="true"></i>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endif; ?>
+                                            <div class="options">
+                                                <a class="bi bi-geo-alt-fill my-auto" href="<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $region_name) ?>" target="_blank"></a>
+                                                <?php if (isset($_SESSION["email"])) : ?>
+                                                        <?php if (isset($loc["favorite_id"])) : ?>
+                                                            <i class="star bi bi-star-fill my-auto" data-loc="<?php echo $loc["location_id"] ?>" data-fav="<?php echo $loc["favorite_id"] ?>" aria-hidden="true"></i>
+                                                        <?php else : ?>
+                                                            <i class="star bi bi-star my-auto" data-loc="<?php echo $loc["location_id"] ?>" aria-hidden="true"></i>
+                                                        <?php endif; ?>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>

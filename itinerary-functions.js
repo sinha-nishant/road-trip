@@ -1,7 +1,7 @@
 function changeImage(newImage) {
     let image = document.querySelector("img");
 
-    if (image.src != newImage.dataset.image) {
+    if (image.src !== newImage.dataset.image) {
         let old_width = image.width;
         let old_height = image.height;
         image.alt = newImage.dataset.alt;
@@ -47,7 +47,7 @@ $(".star").on("click", function (event) {
             "favorite.php",
             { favorite_id: icon.data("fav") },
             function (response) {
-                if (response == "unsuccessful") {
+                if (response === "unsuccessful") {
                     alert("Could not remove favorite.");
                 } else {
                     icon.removeClass("bi-star-fill");
@@ -58,7 +58,7 @@ $(".star").on("click", function (event) {
     }
 });
 
-$(".arrow").click(function (event) {
+$(".arrow").on("click", function (event) {
     event.stopPropagation();
     // If restaurant not upvoted
     let arrow = $(this);
@@ -69,7 +69,7 @@ $(".arrow").click(function (event) {
             "vote.php",
             { res_id: $(this).data("res") },
             function (response) {
-                if (response == "unsuccessful") {
+                if (response === "unsuccessful") {
                     alert("Database error: Could not upvote");
                 } else {
                     arrow.attr("data-upvote", response);
@@ -89,7 +89,7 @@ $(".arrow").click(function (event) {
                 upvote_id: arrow.attr("data-upvote"),
             },
             function (response) {
-                if (response == "unsuccessful") {
+                if (response === "unsuccessful") {
                     alert("Database error: Could not remove upvote");
                 } else {
                     arrow.removeClass("bi-arrow-up-circle-fill");
@@ -100,7 +100,6 @@ $(".arrow").click(function (event) {
     }
 });
 
-console.log("before anime");
 $(function () {
     $("#path > iframe").on("load", function () {
         // Anime.js
@@ -121,8 +120,10 @@ $(function () {
     });
 });
 
+let panels = $(".card, #path");
+
 // Card glow and scale on hover
-$(".card, #path").mouseenter(function (event) {
+panels.on("mouseenter", function () {
     if ($(window).width() >= 992) {
         $(this).css("box-shadow", "0px 0px 7px #03dac6");
         $(this).css("transform", "scale(1.03)");
@@ -130,19 +131,14 @@ $(".card, #path").mouseenter(function (event) {
     }
 });
 
-$(".card, #path").mouseleave(function (event) {
+panels.on("mouseleave", function () {
     if ($(window).width() >= 992) {
         $(this).css("transform", "scale(1)");
         $(this).css("box-shadow", "0px 0px");
     }
 });
 
-// Open google map query for destination
-$(".list-group-item").click(function (event) {
-    open($(this).data("gmap"));
-});
-
 // Open google map query for restaurant
-$(".resName").click(function (event) {
+$(".resName").on("click", function () {
     open($(this).data("gmap"));
 });
