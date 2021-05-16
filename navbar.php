@@ -51,6 +51,10 @@ $mysqli->close();
             background-color: black;
             color: white;
         }
+
+        i {
+            padding-right: 5px;
+        }
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -107,7 +111,7 @@ $mysqli->close();
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="https://drive.google.com/drive/folders/1GZp8hDEIsNs5e5D1azbRk5MApKUEtsk-?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i> Folder</a>
+                    <a class="nav-link" href="https://drive.google.com/drive/folders/1GZp8hDEIsNs5e5D1azbRk5MApKUEtsk-?usp=sharing" target="_blank"><i class="fab fa-google-drive"></i>Folder</a>
                 </li>
             </ul>
         </div>
