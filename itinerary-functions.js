@@ -14,13 +14,13 @@ function changeImage(newImage) {
 
 // Change image on hover over different item in destination list
 let destinations = document.querySelector("#destinations").children;
-for (let i = 0; i < destinations.length; i++) {
-    destinations[i].onmouseenter = function () {
-        changeImage(destinations[i]);
+for (let destination of destinations) {
+    destination.onmouseenter = function () {
+        changeImage(destination);
     };
 }
 
-$(".star").click(function (event) {
+$(".star").on("click", function (event) {
     event.stopPropagation();
     let icon = $(this);
     if (icon.hasClass("bi-star")) {
@@ -30,7 +30,7 @@ $(".star").click(function (event) {
             "favorite.php",
             { location_id: icon.data("loc") },
             function (response) {
-                if (response == "unsuccessful") {
+                if (response === "unsuccessful") {
                     alert("Could not favorite.");
                 } else {
                     icon.data("fav", response);
@@ -100,6 +100,7 @@ $(".arrow").click(function (event) {
     }
 });
 
+console.log("before anime");
 $(function () {
     $("#path > iframe").on("load", function () {
         // Anime.js
@@ -109,6 +110,7 @@ $(function () {
             duration: 1000,
             easing: "easeOutQuad",
         });
+        console.log("in anime");
 
         anime({
             targets: ".row",

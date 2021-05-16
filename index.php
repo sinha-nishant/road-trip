@@ -105,12 +105,11 @@ if (isset($_SESSION["id"])) {
 $mysqli->close();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <link rel="shortcut icon" href="favicon.ico" />
     <title>Road Trip Day <?php echo $day_id . " - " . $region_name ?></title>
-    <lang="en" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -127,7 +126,7 @@ $mysqli->close();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 
     <!-- anime.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="node_modules/animejs/lib/anime.min.js"></script>
 
     <!-- Google Material Design Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
@@ -137,13 +136,14 @@ $mysqli->close();
 </head>
 
 <body>
+
     <?php include('navbar.php'); ?>
 
     <div class="container-fluid mt-1 px-lg-5 pb-sm-2 pb-lg-0">
         <div class="row">
             <div id="destinations-col" class="col-lg">
                 <div class="card w-100 rounded-lg">
-                    <img class="card-image-top w-100 rounded-top" src=<?php echo $locations[0]["image_url"] ?> alt=<?php echo $locations[0]["name"] ?> />
+                    <img class="card-image-top w-100 rounded-top" src="<?php echo $locations[0]["image_url"] ?>" alt="<?php echo $locations[0]["name"] ?>"/>
                     <div id="locations" class="card-body px-0 overflow-auto">
                         <h2 class="card-title pl-3"><?php echo $region_name ?></h2>
                         <h6 class="card-subtitle pl-3 mb-2 text-muted">
@@ -152,7 +152,7 @@ $mysqli->close();
                         <div id="destinations-container" class="px-0">
                             <ul id="destinations" class="list-group list-group-flush w-100">
                                 <?php foreach ($locations as $loc) : ?>
-                                    <li class="list-group-item px-0 border-0" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $region_name) ?> data-image=<?php echo $loc["image_url"] ?> data-alt=<?php echo $loc["name"] ?>>
+                                    <li class="list-group-item px-0 border-0" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($loc["name"] . "+" . $region_name) ?> data-image="<?php echo $loc["image_url"] ?>" data-alt="<?php echo $loc["name"] ?>">
                                         <div class="list-item">
                                             <div class="location-name pl-3 pr-sm-2 pr-md-3">
                                                 <?php echo $loc["name"] ?>
@@ -160,9 +160,9 @@ $mysqli->close();
                                             <?php if (isset($_SESSION["email"])) : ?>
                                                 <div class="my-auto pl-3">
                                                     <?php if (isset($loc["favorite_id"])) : ?>
-                                                        <i class="star bi bi-star-fill" data-loc=<?php echo $loc["location_id"] ?> data-fav=<?php echo $loc["favorite_id"] ?> aria-hidden="true"></i>
+                                                        <i class="star bi bi-star-fill" data-loc="<?php echo $loc["location_id"] ?>" data-fav="<?php echo $loc["favorite_id"] ?>" aria-hidden="true"></i>
                                                     <?php else : ?>
-                                                        <i class="star bi bi-star" data-loc=<?php echo $loc["location_id"] ?> aria-hidden="true"></i>
+                                                        <i class="star bi bi-star" data-loc="<?php echo $loc["location_id"] ?>" aria-hidden="true"></i>
                                                     <?php endif; ?>
                                                 </div>
                                             <?php endif; ?>
@@ -185,8 +185,9 @@ $mysqli->close();
                                     <p id="hotel-name"><?php echo $hotel_name ?></p>
                                 </div>
                             </div>
+
                             <div class="col-6 p-0 rounded-right">
-                                <iframe class="w-100 h-100" src=<?php echo $hotel_map_url ?> style="border: 0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                <iframe class="w-100 h-100" src="<?php echo $hotel_map_url ?>" title="map indicating location of hotel" style="border:0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                             </div>
                         </div>
                     </div>
@@ -195,10 +196,10 @@ $mysqli->close();
                     <div class="card w-100 rounded-lg">
                         <div class="card-body">
                             <div id="restaurants-container" class="overflow-auto">
-                                <table class="table table-borderless">
+                                <table class="table table-borderless" aria-describedby="table of restaurants for the day">
                                     <thead>
                                         <tr>
-                                            <th class="pl-0 pb-0"><span class="material-icons-round">restaurant_menu</span></th>
+                                            <th class="pl-0 pb-0" scope="col"><span class="material-icons-round">restaurant_menu</span></th>
                                             <th scope="col">Restaurant</th>
                                             <th scope="col">Cuisine</th>
                                         </tr>
@@ -209,13 +210,13 @@ $mysqli->close();
                                                 <td>
                                                     <?php if (isset($_SESSION["email"])) : ?>
                                                         <?php if (isset($res["upvote_id"])) : ?>
-                                                            <i class="arrow bi bi-arrow-up-circle-fill" data-res=<?php echo $res["res_id"] ?> data-upvote=<?php echo $res["upvote_id"] ?> aria-hidden="true"></i>
+                                                            <i class="arrow bi bi-arrow-up-circle-fill" data-res="<?php echo $res["res_id"] ?>" data-upvote="<?php echo $res["upvote_id"] ?>" aria-hidden="true"></i>
                                                         <?php else : ?>
-                                                            <i class="arrow bi bi-arrow-up-circle" data-res=<?php echo $res["res_id"] ?> aria-hidden="true"></i>
+                                                            <i class="arrow bi bi-arrow-up-circle" data-res="<?php echo $res["res_id"] ?>" aria-hidden="true"></i>
                                                         <?php endif; ?>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td class="resName" data-gmap=<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($res["name"] . "+" . $region_name . "+" . $res['cuisine'] . "+" . "food") ?>>
+                                                <td class="resName" data-gmap="<?php echo "https://www.google.com/maps/search/?api=1&query=" . urlencode($res["name"] . "+" . $region_name . "+" . $res['cuisine'] . "+" . "food") ?>">
                                                     <?php echo $res['name'] ?>
                                                 </td>
                                                 <td><?php echo $res['cuisine'] ?></td>
@@ -230,7 +231,7 @@ $mysqli->close();
             </div>
             <div id="path-col" class="col-lg">
                 <div id="path" class="h-100 rounded-lg overflow-hidden">
-                    <iframe class="w-100" src=<?php echo $map_url ?> style="border: 0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    <iframe class="w-100" src="<?php echo $map_url ?>" style="border:0" title="Google maps travel path for given day" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
             </div>
         </div>
