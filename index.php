@@ -43,7 +43,7 @@ $hotel_map_url = $result['hotel_map_url'];
 $map_url = $result['map_url'];
 
 // Locations for day query
-$sql = "SELECT location_id, name, image_url from location WHERE day_id = ?";
+$sql = "SELECT location_id, name, image_url from location WHERE day_id = ? ORDER BY location.order";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $day_id);
 $locations = processQuery($mysqli, $stmt)->fetch_all(MYSQLI_ASSOC);
